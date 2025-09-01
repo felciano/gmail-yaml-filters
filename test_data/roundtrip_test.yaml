@@ -1,0 +1,340 @@
+# Gmail filters converted from XML
+# Use gmail-yaml-to-xml to convert back for Gmail import
+
+- from: Google Alerts
+  label: GoogleAlerts
+  archive: true
+- from: felciano@cnmat.berkeley.edu OR ECarlson@wsgc.com OR rmtfelciano@earthlink.net
+  star: true
+- from: (covered.ca.gov OR  donotreplyucsfmychart@ucsf.edu OR  cosmeticdentistryassociates.net
+    OR  hallszeto.com OR  mailer@sparkpeople.com OR  office@mvnutrition.com OR  audrey@notakeout.com
+    OR  cosmeticdentistryassociates.net OR  donotreplyucsfmychart@ucsf.edu OR  rob@pacificanxietygroup.com
+    OR  protonintlondon.com OR  thelondonclinic.co.uk OR  uclh.nhs.uk OR  refer.nhs.uk
+    OR  Maggies.London@maggiescentres.org)
+- from: felciano@ingenuity.com
+  to: felciano@yahoo.com
+  subject: FW
+  label: IngenuityFlagged
+  archive: true
+- from: fitpregnancy@email.fitpregnancy.com OR thebump@email.thebump.com
+  label: lists/baby
+  archive: true
+- from: mailer@sparkpeople.com OR office@mvnutrition.com OR audrey@notakeout.com
+  label: healthcare/wellness
+  archive: true
+  not_spam: true
+- from: ealerts@ybca.org OR editor@somalit.com OR Weekly_Connections@citysearch.com
+    OR public_relations@citysearch.com OR events@eventful.com
+  label: fun/What's Going On
+  archive: true
+- from: newsletter@metrowize.com
+  label: fun/What's Going On
+  archive: true
+- from: Plaxo Birthday Reminder
+  label: birthday-soon
+  archive: true
+- from: viewtrip-admin@galileo.com
+  subject: Itinerary
+  label: itineraries
+- from: wellsfargo.com
+  subject: Wells Fargo Checking Account Update
+  label: financial/updates
+  archive: true
+- from: americanexpress@welcome.aexp.com
+  label: financial/notifications
+  star: true
+- from: Billpay@wellsfargo.com
+  has: '"Expected Bill Not Received"'
+  label: financial/attention!
+  star: true
+- from: noreply@townhog.com
+  label: lists/townhog
+  archive: true
+- from: email03.sbc.com
+  subject: '"bill is ready to view and print"'
+  label: financial/notifications
+  archive: true
+- from: support@tripit.com
+  subject: '"welcome to" OR "departure summary" OR "check-in reminder"'
+  label: tripinfo
+- from: unitedeasycheckin@unitedeco.p0.com
+  subject: '"Online check-in is now available"'
+  label: tripinfo
+- from: ofsrep.alert_osn@wellsfargo.com
+  label: financial/statements
+  archive: true
+- to: '"felciano@digitalalchemy.com" OR "info@digitalalchemy.com" OR "ramon@digitalalchemy.com"'
+  label: digitalalchemy
+- from: deals@livingsocial.com OR google-offers@offers.google.com OR mail@e.groupon.com
+    OR deals@memberdealsusa.com
+  archive: true
+  not_spam: true
+- to: bottlepy.googlegroups.com
+  archive: true
+- from: recipes@dm.email.epicurious.com
+  archive: true
+- from: babette@bakespace.com
+  archive: true
+- from: aviva@thescramble.com
+  archive: true
+- from: MealsMatter@mail65.subscribermail.com
+  archive: true
+- from: email@allrecipes.com
+  archive: true
+- from: Billpay@wellsfargo.com
+  label: Notifications/Financial
+  archive: true
+- from: sbc.com
+  subject: Reminder to pay
+  label: Notifications/Financial
+  archive: true
+- from: ofsrep.alert_cda@wellsfargo.com OR chase@alerts.chase.com OR billing@37signals.com
+    OR ofsrep.alert_cuk@wellsfargo.com
+  does_not_have: '"Wells Fargo Checking Account Balance Update" OR "Wells Fargo Checking
+    Account Update"'
+  label: Notifications/Financial
+  archive: true
+- from: nextdoor@nextdoor.com OR reply@nextdoor.com
+  has: '"was intended for felciano@yahoo.com"'
+  label: Social Updates/Nextdoor
+- from: themove@thrillist.com
+  archive: true
+- from: '"Bay Area LifeTech"'
+  label: Professional Networking Local
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_social
+- from: IGNORETHISFILTER
+  has: category:promotions
+  archive: true
+- from: donotreply@frenchamericansf.myenotice.com OR frenchamericansf.org OR internationalsf.org
+  label: FAIS
+  important: true
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_personal
+- has: '"register" from:mileageplus_partner@news.united.com OR to:mileageplus_partner@news.united.com'
+  label: airlines/Mileage Plus Offers
+  important: true
+- from: jamortega@yahoo.com
+  forward: emma@emmacarlson.com
+- has: list:(bmi-colloquia-tu.lists.stanford.edu)
+  label: lists/BMI
+  archive: true
+- has: list:(bmir-colloquia-th.lists.stanford.edu)
+  label: lists/BMI
+  archive: true
+- from: capitalone@service.capitalone.com
+  subject: '"wasn''t processed"'
+  star: true
+  important: true
+- from: no_reply@email.apple.com
+  subject: Your receipt from Apple.
+  label: Receipts To File/iTunes Purchases
+- from: felciano@gmail.com
+  subject: Arq Serenity backup (0 errors)
+  archive: true
+- subject: 'Pharos Alert: Updates are available for packages on Pharos'
+  label: autoarchive3d
+- from: alerts@alerts.craigslist.org
+  has: '"new result for search terms"'
+  label: autoarchive2d
+- from: noreply@email.apple.com
+  subject: added to “Carlciano Family” calendar.
+  label: autoarchive7d
+- from: noreply@email.apple.com
+  subject: deleted from “Carlciano Family” calendar.
+  label: autoarchive7d
+- from: felciano@gmail.com
+  subject: Backup Finished Successfully
+  label: backups/ramon
+  archive: true
+- from: felciano@comcast.net
+  subject: birthdays this week
+  label: autoarchive2d
+- from: felciano@gmail.com
+  subject: Arq Serenity backup (0 errors)
+  label: autoarchive2d
+- has: list:email.superhuman.com
+  not_spam: true
+  important: true
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_personal
+- from: '"statefarminfo.com"'
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_personal
+- from: '"SantanderInforma@emailing.bancosantander-mail.es"'
+  trash: true
+- from: '"noreply@ismfast.com"'
+  important: true
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_personal
+- from: '"careteam@honorcare.com"'
+  important: true
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_personal
+- from: '*@superhuman.com -sharing@superhuman.com'
+  not_spam: true
+  important: true
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_personal
+- from: '"noor.m@insightinnovatorss.online"'
+  trash: true
+- from: '"memo@whispermemos.com"'
+  important: true
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_personal
+- from: felciano@gmail.com
+  subject: “birthdays this week:”
+  label: autoarchive2d
+- from: felciano@gmail.com
+  subject: Radarr [Movie]
+  label: autoarchive2d
+- from: notifications@nest.com
+  subject: Your camera is offline
+  label: autoarchive7d
+- from: linkedin
+  has: '"start a conversation with your new connection"'
+  label: LinkedIn/LinkedIn Connections
+  archive: true
+  not_spam: true
+- from: non-mail-user@vmail.mywavephone.com
+  subject: FELCIANO
+  important: true
+- from: newsletter@mailing.claro.com.pe
+  has: Feliciano
+  trash: true
+- from: felciano@gmail.com
+  subject: Back up Astrid MacBookAir to Arq8 on Pharos
+  label: backups/astrid
+- from: felciano@gmail.com
+  subject: Serenity, Clarity and The Vault to Arq12 on Pharos
+  label: backups/ramon
+- from: felciano@gmail.com
+  subject: Serenity, Clarity and The Vault on Arq6
+  label: backups/ramon
+- from: felciano@gmail.com
+  subject: Arq6 on Air 2020
+  label: backups/emma
+- from: felciano@gmail.com
+  subject: Back up all MacBook Air 2020 drives to Masonic Temple
+  label: backups/emma
+- from: felciano@gmail.com
+  subject: Back up all MacBook Air 2020 drives to Arq6 on Pharos (0 errors)
+  label: backups/emma
+  archive: true
+- from: felciano@gmail.com
+  subject: Serenity, Clarity and The Vault to Arq12 on Pharos (0 errors)
+  label: backups/ramon
+  archive: true
+- from: felciano@gmail.com
+  subject: Back up Astrid MacBookAir to Arq8 on Pharos (0 errors)
+  label: backups/astrid
+  archive: true
+- from: no-reply@researchgatemail.net
+  label: '[ia]/ResearchGate'
+  archive: true
+  not_spam: true
+- from: no_reply@email.apple.com
+  subject: Your Subscription Renewal
+  label: Receipts To File/iTunes Purchases
+- from: apps-scripts-notifications@google.com
+  label: alert-me/google-scripts-notif
+  archive: true
+  not_spam: true
+- from: felciano@gmail.com
+  subject: CDSR
+  label: financial/daily spending
+- subject: CDSR
+  label: '[ia]/Carlciano Spending'
+  not_spam: true
+- has: from:superorganizers OR from:noreply@medium.com OR from:hello@every.to
+  label: '[ia]/Newsletters'
+  not_spam: true
+- from: alphasights.com OR glgroup.com OR thirdbridge.com OR guidepointglobal.com
+    OR graphite.com OR guidepoint.com OR prosapient.com)
+  label: '[ia]/Expert Networks'
+  not_spam: true
+- from: synologynotification.com OR alerts@notify.wellsfargo.com
+  label: '[ia]/Notifications'
+  not_spam: true
+- from: jobalerts-noreply@linkedin.com
+  label: '[ia]/Job Alerts'
+- from: parentsquare.com OR littlemissionstudio.com
+  label: '[ia]/Synergy'
+- from: non-mail-user@vmail.mywavephone.com
+  label: '[ia]/VoiceMail'
+- from: felciano@gmail.com
+  subject: NETGEAR PortOfNewPicton Log
+  label: logs
+  archive: true
+- subject: '"black friday" OR "cybermonday" OR "cyber monday"'
+  label: black-friday
+- has: '"global BIO-India"'
+  label: '[ia]/Global Bio India 2023'
+- has: list:(<worldwide.ctolunches.groups.io>)
+  label: lists/ctolunches
+  archive: true
+- from: halcyonschool.com
+  label: '[ia]/Halcyon'
+- from: octopus.energy
+  label: utilities/octopus.energy
+- from: no-reply@classroom.google.com
+  subject: Daily Summary
+  label: classroom
+- from: cosmeticdentistryassociates.net OR hallszeto.com
+  label: healthcare/ramon
+- from: donotreplyucsfmychart@ucsf.edu
+  has: '"You have a new message in UCSF MyChart"'
+  label: alert-me/health
+  archive: true
+  not_spam: true
+- from: donotreplyucsfmychart@ucsf.edu
+  has: '"There is a new message for Rita Felciano in UCSF MyChart"'
+  label: healthcare/notification-regular-rita
+  archive: true
+  not_spam: true
+- from: donotreplyucsfmychart@ucsf.edu
+  has: '"A new message has been sent to Emma Carlson in MyChart"'
+  label: healthcare/notification-regular-emma
+- from: alerts@notify.wellsfargo.com
+  subject: Your mortgage statement is ready
+  has: '"Here''s the latest for account Mortgage"'
+  label: alert-me-not/wells-fargo
+  archive: true
+- from: alerts@notify.wellsfargo.com
+  subject: Your statement for account
+  has: '"Your month in review"'
+  label: alert-me-not/wells-fargo
+  archive: true
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_notification
+- from: alerts@notify.wellsfargo.com
+  subject: '"Account update"'
+  has: '"Here is the update you requested for your Wells Fargo account"'
+  label: alert-me-not/wells-fargo
+  archive: true
+  _gmail_raw:
+    smartLabelToApply: ^smartlabel_notification
+- from: no-reply@mail.evernote.com
+  subject: '"Note shared with you"'
+  label: alert-me/note-shared-with-me
+- from: staticforms.xyz
+  label: alert-me/static-forms-notif
+- from: Synologynotification.com
+  label: alert-me/synology-notif
+- from: covered.ca.gov
+  label: alert-me/health
+  important: true
+- from: surveys@guidepoint.com
+  label: '[ia]/Expert Networks'
+  archive: true
+- from: (alphasights.com OR glgroup.com OR thirdbridge.com OR guidepointglobal.com
+    OR graphite.com OR guidepoint.com OR prosapient.com)
+  subject: survey
+  label: '[ia]/Expert Networks/survey-request'
+  archive: true
+- from: noreply@us2.make.com
+  subject: Encountered AND (warning OR error) ([PFM] OR [SO)
+  archive: true
+- from: noreply@us2.make.com
+  subject: Encountered AND (warning OR error) AND ([PFM] OR [SO)
+  archive: true

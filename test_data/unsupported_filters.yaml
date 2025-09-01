@@ -1,0 +1,613 @@
+# Filters with unsupported Gmail features
+# These filters need manual review and adjustment
+
+size_based_filters:
+- index: 3
+  filter: &id004
+    from: (covered.ca.gov OR  donotreplyucsfmychart@ucsf.edu OR  cosmeticdentistryassociates.net
+      OR  hallszeto.com OR  mailer@sparkpeople.com OR  office@mvnutrition.com OR  audrey@notakeout.com
+      OR  cosmeticdentistryassociates.net OR  donotreplyucsfmychart@ucsf.edu OR  rob@pacificanxietygroup.com
+      OR  protonintlondon.com OR  thelondonclinic.co.uk OR  uclh.nhs.uk OR  refer.nhs.uk
+      OR  Maggies.London@maggiescentres.org)
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #3: Size-based filter'
+- index: 6
+  filter:
+    from: mailer@sparkpeople.com OR office@mvnutrition.com OR audrey@notakeout.com
+    label: healthcare/wellness
+    shouldArchive: 'true'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #6: Size-based filter'
+- index: 19
+  filter:
+    to: '"felciano@digitalalchemy.com" OR "info@digitalalchemy.com" OR "ramon@digitalalchemy.com"'
+    label: digitalalchemy
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #19: Size-based filter'
+- index: 33
+  filter:
+    from: IGNORETHISFILTER
+    hasTheWord: category:promotions
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #33: Size-based filter'
+- index: 34
+  filter: &id001
+    from: donotreply@frenchamericansf.myenotice.com OR frenchamericansf.org OR internationalsf.org
+    label: FAIS
+    shouldAlwaysMarkAsImportant: 'true'
+    smartLabelToApply: ^smartlabel_personal
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #34: Size-based filter'
+- index: 35
+  filter:
+    hasTheWord: '"register" from:mileageplus_partner@news.united.com OR to:mileageplus_partner@news.united.com'
+    label: airlines/Mileage Plus Offers
+    shouldAlwaysMarkAsImportant: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #35: Size-based filter'
+- index: 36
+  filter:
+    from: jamortega@yahoo.com
+    forwardTo: emma@emmacarlson.com
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #36: Size-based filter'
+- index: 37
+  filter:
+    hasTheWord: list:(bmi-colloquia-tu.lists.stanford.edu)
+    label: lists/BMI
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #37: Size-based filter'
+- index: 38
+  filter:
+    hasTheWord: list:(bmir-colloquia-th.lists.stanford.edu)
+    label: lists/BMI
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #38: Size-based filter'
+- index: 39
+  filter:
+    from: capitalone@service.capitalone.com
+    subject: '"wasn''t processed"'
+    shouldStar: 'true'
+    shouldAlwaysMarkAsImportant: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #39: Size-based filter'
+- index: 40
+  filter:
+    from: no_reply@email.apple.com
+    subject: Your receipt from Apple.
+    label: Receipts To File/iTunes Purchases
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #40: Size-based filter'
+- index: 41
+  filter:
+    from: felciano@gmail.com
+    subject: Arq Serenity backup (0 errors)
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #41: Size-based filter'
+- index: 42
+  filter:
+    subject: 'Pharos Alert: Updates are available for packages on Pharos'
+    label: autoarchive3d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #42: Size-based filter'
+- index: 43
+  filter:
+    from: alerts@alerts.craigslist.org
+    hasTheWord: '"new result for search terms"'
+    label: autoarchive2d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #43: Size-based filter'
+- index: 44
+  filter:
+    from: noreply@email.apple.com
+    subject: added to “Carlciano Family” calendar.
+    label: autoarchive7d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #44: Size-based filter'
+- index: 45
+  filter:
+    from: noreply@email.apple.com
+    subject: deleted from “Carlciano Family” calendar.
+    label: autoarchive7d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #45: Size-based filter'
+- index: 46
+  filter:
+    from: felciano@gmail.com
+    subject: Backup Finished Successfully
+    label: backups/ramon
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #46: Size-based filter'
+- index: 47
+  filter:
+    from: felciano@comcast.net
+    subject: birthdays this week
+    label: autoarchive2d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #47: Size-based filter'
+- index: 48
+  filter:
+    from: felciano@gmail.com
+    subject: Arq Serenity backup (0 errors)
+    label: autoarchive2d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #48: Size-based filter'
+- index: 57
+  filter:
+    from: felciano@gmail.com
+    subject: “birthdays this week:”
+    label: autoarchive2d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #57: Size-based filter'
+- index: 58
+  filter:
+    from: felciano@gmail.com
+    subject: Radarr [Movie]
+    label: autoarchive2d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #58: Size-based filter'
+- index: 59
+  filter:
+    from: notifications@nest.com
+    subject: Your camera is offline
+    label: autoarchive7d
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #59: Size-based filter'
+- index: 60
+  filter:
+    from: linkedin
+    hasTheWord: '"start a conversation with your new connection"'
+    label: LinkedIn/LinkedIn Connections
+    shouldArchive: 'true'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #60: Size-based filter'
+- index: 61
+  filter:
+    from: non-mail-user@vmail.mywavephone.com
+    subject: FELCIANO
+    shouldAlwaysMarkAsImportant: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #61: Size-based filter'
+- index: 62
+  filter:
+    from: newsletter@mailing.claro.com.pe
+    hasTheWord: Feliciano
+    shouldTrash: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #62: Size-based filter'
+- index: 63
+  filter:
+    from: felciano@gmail.com
+    subject: Back up Astrid MacBookAir to Arq8 on Pharos
+    label: backups/astrid
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #63: Size-based filter'
+- index: 64
+  filter:
+    from: felciano@gmail.com
+    subject: Serenity, Clarity and The Vault to Arq12 on Pharos
+    label: backups/ramon
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #64: Size-based filter'
+- index: 65
+  filter:
+    from: felciano@gmail.com
+    subject: Serenity, Clarity and The Vault on Arq6
+    label: backups/ramon
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #65: Size-based filter'
+- index: 66
+  filter:
+    from: felciano@gmail.com
+    subject: Arq6 on Air 2020
+    label: backups/emma
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #66: Size-based filter'
+- index: 67
+  filter:
+    from: felciano@gmail.com
+    subject: Back up all MacBook Air 2020 drives to Masonic Temple
+    label: backups/emma
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #67: Size-based filter'
+- index: 68
+  filter:
+    from: felciano@gmail.com
+    subject: Back up all MacBook Air 2020 drives to Arq6 on Pharos (0 errors)
+    label: backups/emma
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #68: Size-based filter'
+- index: 69
+  filter:
+    from: felciano@gmail.com
+    subject: Serenity, Clarity and The Vault to Arq12 on Pharos (0 errors)
+    label: backups/ramon
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #69: Size-based filter'
+- index: 70
+  filter:
+    from: felciano@gmail.com
+    subject: Back up Astrid MacBookAir to Arq8 on Pharos (0 errors)
+    label: backups/astrid
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #70: Size-based filter'
+- index: 71
+  filter:
+    from: no-reply@researchgatemail.net
+    label: '[ia]/ResearchGate'
+    shouldArchive: 'true'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #71: Size-based filter'
+- index: 72
+  filter:
+    from: no_reply@email.apple.com
+    subject: Your Subscription Renewal
+    label: Receipts To File/iTunes Purchases
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #72: Size-based filter'
+- index: 73
+  filter:
+    from: apps-scripts-notifications@google.com
+    label: alert-me/google-scripts-notif
+    shouldArchive: 'true'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #73: Size-based filter'
+- index: 74
+  filter:
+    from: felciano@gmail.com
+    subject: CDSR
+    label: financial/daily spending
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #74: Size-based filter'
+- index: 75
+  filter:
+    subject: CDSR
+    label: '[ia]/Carlciano Spending'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #75: Size-based filter'
+- index: 76
+  filter:
+    hasTheWord: from:superorganizers OR from:noreply@medium.com OR from:hello@every.to
+    label: '[ia]/Newsletters'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #76: Size-based filter'
+- index: 77
+  filter:
+    from: alphasights.com OR glgroup.com OR thirdbridge.com OR guidepointglobal.com
+      OR graphite.com OR guidepoint.com OR prosapient.com)
+    label: '[ia]/Expert Networks'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #77: Size-based filter'
+- index: 78
+  filter:
+    from: synologynotification.com OR alerts@notify.wellsfargo.com
+    label: '[ia]/Notifications'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #78: Size-based filter'
+- index: 79
+  filter:
+    from: jobalerts-noreply@linkedin.com
+    label: '[ia]/Job Alerts'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #79: Size-based filter'
+- index: 80
+  filter:
+    from: parentsquare.com OR littlemissionstudio.com
+    label: '[ia]/Synergy'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #80: Size-based filter'
+- index: 81
+  filter:
+    from: non-mail-user@vmail.mywavephone.com
+    label: '[ia]/VoiceMail'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #81: Size-based filter'
+- index: 82
+  filter:
+    from: felciano@gmail.com
+    subject: NETGEAR PortOfNewPicton Log
+    label: logs
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #82: Size-based filter'
+- index: 83
+  filter:
+    subject: '"black friday" OR "cybermonday" OR "cyber monday"'
+    label: black-friday
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #83: Size-based filter'
+- index: 84
+  filter:
+    hasTheWord: '"global BIO-India"'
+    label: '[ia]/Global Bio India 2023'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #84: Size-based filter'
+- index: 85
+  filter:
+    hasTheWord: list:(<worldwide.ctolunches.groups.io>)
+    label: lists/ctolunches
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #85: Size-based filter'
+- index: 86
+  filter:
+    from: halcyonschool.com
+    label: '[ia]/Halcyon'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #86: Size-based filter'
+- index: 87
+  filter:
+    from: octopus.energy
+    label: utilities/octopus.energy
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #87: Size-based filter'
+- index: 88
+  filter:
+    from: no-reply@classroom.google.com
+    subject: Daily Summary
+    label: classroom
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #88: Size-based filter'
+- index: 89
+  filter:
+    from: cosmeticdentistryassociates.net OR hallszeto.com
+    label: healthcare/ramon
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #89: Size-based filter'
+- index: 90
+  filter:
+    from: donotreplyucsfmychart@ucsf.edu
+    hasTheWord: '"You have a new message in UCSF MyChart"'
+    label: alert-me/health
+    shouldArchive: 'true'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #90: Size-based filter'
+- index: 91
+  filter:
+    from: donotreplyucsfmychart@ucsf.edu
+    hasTheWord: '"There is a new message for Rita Felciano in UCSF MyChart"'
+    label: healthcare/notification-regular-rita
+    shouldArchive: 'true'
+    shouldNeverSpam: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #91: Size-based filter'
+- index: 92
+  filter:
+    from: donotreplyucsfmychart@ucsf.edu
+    hasTheWord: '"A new message has been sent to Emma Carlson in MyChart"'
+    label: healthcare/notification-regular-emma
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #92: Size-based filter'
+- index: 93
+  filter:
+    from: alerts@notify.wellsfargo.com
+    subject: Your mortgage statement is ready
+    hasTheWord: '"Here''s the latest for account Mortgage"'
+    label: alert-me-not/wells-fargo
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #93: Size-based filter'
+- index: 94
+  filter: &id002
+    from: alerts@notify.wellsfargo.com
+    subject: Your statement for account
+    hasTheWord: '"Your month in review"'
+    label: alert-me-not/wells-fargo
+    shouldArchive: 'true'
+    smartLabelToApply: ^smartlabel_notification
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #94: Size-based filter'
+- index: 95
+  filter: &id003
+    from: alerts@notify.wellsfargo.com
+    subject: '"Account update"'
+    hasTheWord: '"Here is the update you requested for your Wells Fargo account"'
+    label: alert-me-not/wells-fargo
+    shouldArchive: 'true'
+    smartLabelToApply: ^smartlabel_notification
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #95: Size-based filter'
+- index: 96
+  filter:
+    from: no-reply@mail.evernote.com
+    subject: '"Note shared with you"'
+    label: alert-me/note-shared-with-me
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #96: Size-based filter'
+- index: 97
+  filter:
+    from: staticforms.xyz
+    label: alert-me/static-forms-notif
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #97: Size-based filter'
+- index: 98
+  filter:
+    from: Synologynotification.com
+    label: alert-me/synology-notif
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #98: Size-based filter'
+- index: 99
+  filter:
+    from: covered.ca.gov
+    label: alert-me/health
+    shouldAlwaysMarkAsImportant: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #99: Size-based filter'
+- index: 100
+  filter:
+    from: surveys@guidepoint.com
+    label: '[ia]/Expert Networks'
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #100: Size-based filter'
+- index: 101
+  filter:
+    from: (alphasights.com OR glgroup.com OR thirdbridge.com OR guidepointglobal.com
+      OR graphite.com OR guidepoint.com OR prosapient.com)
+    subject: survey
+    label: '[ia]/Expert Networks/survey-request'
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #101: Size-based filter'
+- index: 102
+  filter:
+    from: noreply@us2.make.com
+    subject: Encountered AND (warning OR error) ([PFM] OR [SO)
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #102: Size-based filter'
+- index: 103
+  filter:
+    from: noreply@us2.make.com
+    subject: Encountered AND (warning OR error) AND ([PFM] OR [SO)
+    shouldArchive: 'true'
+    sizeOperator: s_sl
+    sizeUnit: s_smb
+  description: 'Filter #103: Size-based filter'
+smart_label_filters:
+- index: 32
+  filter:
+    from: '"Bay Area LifeTech"'
+    label: Professional Networking Local
+    smartLabelToApply: ^smartlabel_social
+  description: 'Filter #32: Uses smart labels'
+- index: 34
+  filter: *id001
+  description: 'Filter #34: Uses smart labels'
+- index: 49
+  filter:
+    hasTheWord: list:email.superhuman.com
+    shouldNeverSpam: 'true'
+    shouldAlwaysMarkAsImportant: 'true'
+    smartLabelToApply: ^smartlabel_personal
+  description: 'Filter #49: Uses smart labels'
+- index: 50
+  filter: &id005
+    from: '"statefarminfo.com"'
+    smartLabelToApply: ^smartlabel_personal
+  description: 'Filter #50: Uses smart labels'
+- index: 52
+  filter:
+    from: '"noreply@ismfast.com"'
+    shouldAlwaysMarkAsImportant: 'true'
+    smartLabelToApply: ^smartlabel_personal
+  description: 'Filter #52: Uses smart labels'
+- index: 53
+  filter:
+    from: '"careteam@honorcare.com"'
+    shouldAlwaysMarkAsImportant: 'true'
+    smartLabelToApply: ^smartlabel_personal
+  description: 'Filter #53: Uses smart labels'
+- index: 54
+  filter:
+    from: '*@superhuman.com -sharing@superhuman.com'
+    shouldNeverSpam: 'true'
+    shouldAlwaysMarkAsImportant: 'true'
+    smartLabelToApply: ^smartlabel_personal
+  description: 'Filter #54: Uses smart labels'
+- index: 56
+  filter:
+    from: '"memo@whispermemos.com"'
+    shouldAlwaysMarkAsImportant: 'true'
+    smartLabelToApply: ^smartlabel_personal
+  description: 'Filter #56: Uses smart labels'
+- index: 94
+  filter: *id002
+  description: 'Filter #94: Uses smart labels'
+- index: 95
+  filter: *id003
+  description: 'Filter #95: Uses smart labels'
+no_action_filters:
+- index: 3
+  filter: *id004
+  description: 'Filter #3: Has conditions but no actions'
+- index: 50
+  filter: *id005
+  description: 'Filter #50: Has conditions but no actions'
+summary:
+  total_filters: 103
+  size_based: 66
+  smart_labels: 10
+  no_actions: 2

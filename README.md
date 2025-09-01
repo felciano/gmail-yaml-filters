@@ -21,32 +21,73 @@ By default, the command line script will generate XML to stdout, which
 you can then upload to Gmail yourself:
 
 ```bash
+# Original behavior (still works for backward compatibility)
 $ gmail-yaml-filters my-filters.yaml > my-filters.xml
+
+# Explicit export command (recommended)
+$ gmail-yaml-filters export my-filters.yaml -o my-filters.xml
+```
+
+## Converting Between XML and YAML
+
+The tool supports bidirectional conversion between Gmail's XML export format and YAML.
+All Gmail-specific properties are preserved to ensure perfect round-trip conversion.
+
+```bash
+# Convert Gmail XML export to YAML (auto-detects format)
+$ gmail-yaml-filters convert mailFilters.xml -o my-filters.yaml
+
+# Convert YAML back to Gmail XML for re-import
+$ gmail-yaml-filters convert my-filters.yaml -o filters.xml
+
+# Force output format if needed
+$ gmail-yaml-filters convert filters.xml --to yaml -o output.yaml
+
+# Clean up output by removing Gmail's default values
+$ gmail-yaml-filters convert mailFilters.xml --smart-clean -o clean.yaml
+
+# Show detailed conversion information
+$ gmail-yaml-filters convert mailFilters.xml --verbose -o my-filters.yaml
+
+# Fail if unsupported Gmail properties are encountered
+$ gmail-yaml-filters convert mailFilters.xml --fail-on-unsupported-properties
+```
+
+## Validating Round-trip Conversion
+
+Validate that your filters can be converted from XML to YAML and back without data loss:
+
+```bash
+# Validate round-trip conversion (XML → YAML → XML)
+$ gmail-yaml-filters validate mailFilters.xml
+
+# Show detailed validation information
+$ gmail-yaml-filters validate mailFilters.xml --verbose
 ```
 
 ## Synchronization via Gmail API
 
-If you are the trusting type, you can authorize the script to
-upload new filters and remove obsolete filters via Gmail's API.
-Before using any of these commands, you will need to create
+You can authorize the script to manage your Gmail filters via the API.
+Before using these commands, you will need to create
 [`client_secret.json`](https://developers.google.com/identity/protocols/oauth2/web-server#creatingcred)
 and store it in the same directory as your YAML file.
 
 ```bash
 # Upload all filters (and create new labels) from the configuration file
-$ gmail-yaml-filters --upload my-filters.yaml
+$ gmail-yaml-filters upload my-filters.yaml
 
 # Delete any filters that aren't defined in the configuration file
-$ gmail-yaml-filters --prune my-filters.yaml
+$ gmail-yaml-filters prune my-filters.yaml
 
-# Do both of these steps at once.
-$ gmail-yaml-filters --sync my-filters.yaml
+# Do both of these steps at once (upload + prune)
+$ gmail-yaml-filters sync my-filters.yaml
 
-# See what would happen but don't apply any changes.
-$ gmail-yaml-filters --dry-run --sync my-filters.yaml
+# See what would happen but don't apply any changes
+$ gmail-yaml-filters sync --dry-run my-filters.yaml
 
-# Delete all your filters. (Yikes!)
-$ gmail-yaml-filters --delete-all
+# Also remove unused labels when pruning
+$ gmail-yaml-filters prune --prune-labels my-filters.yaml
+$ gmail-yaml-filters sync --prune-labels my-filters.yaml
 ```
 
 If you need to pipe configuration from somewhere else, you can do that

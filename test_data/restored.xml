@@ -1,0 +1,836 @@
+<?xml version='1.0' encoding='utf-8'?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:apps="http://schemas.google.com/apps/2006">
+  <title>Mail Filters</title>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="Google Alerts"/>
+    <apps:property name="label" value="GoogleAlerts"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@cnmat.berkeley.edu OR ECarlson@wsgc.com OR rmtfelciano@earthlink.net"/>
+    <apps:property name="shouldStar" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="(covered.ca.gov OR  donotreplyucsfmychart@ucsf.edu OR  cosmeticdentistryassociates.net OR  hallszeto.com OR  mailer@sparkpeople.com OR  office@mvnutrition.com OR  audrey@notakeout.com OR  cosmeticdentistryassociates.net OR  donotreplyucsfmychart@ucsf.edu OR  rob@pacificanxietygroup.com OR  protonintlondon.com OR  thelondonclinic.co.uk OR  uclh.nhs.uk OR  refer.nhs.uk OR  Maggies.London@maggiescentres.org)"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@ingenuity.com"/>
+    <apps:property name="to" value="felciano@yahoo.com"/>
+    <apps:property name="subject" value="FW"/>
+    <apps:property name="label" value="IngenuityFlagged"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="fitpregnancy@email.fitpregnancy.com OR thebump@email.thebump.com"/>
+    <apps:property name="label" value="lists/baby"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="mailer@sparkpeople.com OR office@mvnutrition.com OR audrey@notakeout.com"/>
+    <apps:property name="label" value="healthcare/wellness"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="ealerts@ybca.org OR editor@somalit.com OR Weekly_Connections@citysearch.com OR public_relations@citysearch.com OR events@eventful.com"/>
+    <apps:property name="label" value="fun/What's Going On"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="newsletter@metrowize.com"/>
+    <apps:property name="label" value="fun/What's Going On"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="Plaxo Birthday Reminder"/>
+    <apps:property name="label" value="birthday-soon"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="viewtrip-admin@galileo.com"/>
+    <apps:property name="subject" value="Itinerary"/>
+    <apps:property name="label" value="itineraries"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="wellsfargo.com"/>
+    <apps:property name="subject" value="Wells Fargo Checking Account Update"/>
+    <apps:property name="label" value="financial/updates"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="americanexpress@welcome.aexp.com"/>
+    <apps:property name="label" value="financial/notifications"/>
+    <apps:property name="shouldStar" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="Billpay@wellsfargo.com"/>
+    <apps:property name="hasTheWord" value="&quot;Expected Bill Not Received&quot;"/>
+    <apps:property name="label" value="financial/attention!"/>
+    <apps:property name="shouldStar" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="noreply@townhog.com"/>
+    <apps:property name="label" value="lists/townhog"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="email03.sbc.com"/>
+    <apps:property name="subject" value="&quot;bill is ready to view and print&quot;"/>
+    <apps:property name="label" value="financial/notifications"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="support@tripit.com"/>
+    <apps:property name="subject" value="&quot;welcome to&quot; OR &quot;departure summary&quot; OR &quot;check-in reminder&quot;"/>
+    <apps:property name="label" value="tripinfo"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="unitedeasycheckin@unitedeco.p0.com"/>
+    <apps:property name="subject" value="&quot;Online check-in is now available&quot;"/>
+    <apps:property name="label" value="tripinfo"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="ofsrep.alert_osn@wellsfargo.com"/>
+    <apps:property name="label" value="financial/statements"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="to" value="&quot;felciano@digitalalchemy.com&quot; OR &quot;info@digitalalchemy.com&quot; OR &quot;ramon@digitalalchemy.com&quot;"/>
+    <apps:property name="label" value="digitalalchemy"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="deals@livingsocial.com OR google-offers@offers.google.com OR mail@e.groupon.com OR deals@memberdealsusa.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="to" value="bottlepy.googlegroups.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="recipes@dm.email.epicurious.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="babette@bakespace.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="aviva@thescramble.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="MealsMatter@mail65.subscribermail.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="email@allrecipes.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="Billpay@wellsfargo.com"/>
+    <apps:property name="label" value="Notifications/Financial"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="sbc.com"/>
+    <apps:property name="subject" value="Reminder to pay"/>
+    <apps:property name="label" value="Notifications/Financial"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="ofsrep.alert_cda@wellsfargo.com OR chase@alerts.chase.com OR billing@37signals.com OR ofsrep.alert_cuk@wellsfargo.com"/>
+    <apps:property name="doesNotHaveTheWord" value="&quot;Wells Fargo Checking Account Balance Update&quot; OR &quot;Wells Fargo Checking Account Update&quot;"/>
+    <apps:property name="label" value="Notifications/Financial"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="nextdoor@nextdoor.com OR reply@nextdoor.com"/>
+    <apps:property name="hasTheWord" value="&quot;was intended for felciano@yahoo.com&quot;"/>
+    <apps:property name="label" value="Social Updates/Nextdoor"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="themove@thrillist.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="&quot;Bay Area LifeTech&quot;"/>
+    <apps:property name="label" value="Professional Networking Local"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_social"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="IGNORETHISFILTER"/>
+    <apps:property name="hasTheWord" value="category:promotions"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="donotreply@frenchamericansf.myenotice.com OR frenchamericansf.org OR internationalsf.org"/>
+    <apps:property name="label" value="FAIS"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_personal"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="hasTheWord" value="&quot;register&quot; from:mileageplus_partner@news.united.com OR to:mileageplus_partner@news.united.com"/>
+    <apps:property name="label" value="airlines/Mileage Plus Offers"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="jamortega@yahoo.com"/>
+    <apps:property name="forwardTo" value="emma@emmacarlson.com"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="hasTheWord" value="list:(bmi-colloquia-tu.lists.stanford.edu)"/>
+    <apps:property name="label" value="lists/BMI"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="hasTheWord" value="list:(bmir-colloquia-th.lists.stanford.edu)"/>
+    <apps:property name="label" value="lists/BMI"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="capitalone@service.capitalone.com"/>
+    <apps:property name="subject" value="&quot;wasn't processed&quot;"/>
+    <apps:property name="shouldStar" value="true"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="no_reply@email.apple.com"/>
+    <apps:property name="subject" value="Your receipt from Apple."/>
+    <apps:property name="label" value="Receipts To File/iTunes Purchases"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Arq Serenity backup (0 errors)"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="subject" value="Pharos Alert: Updates are available for packages on Pharos"/>
+    <apps:property name="label" value="autoarchive3d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="alerts@alerts.craigslist.org"/>
+    <apps:property name="hasTheWord" value="&quot;new result for search terms&quot;"/>
+    <apps:property name="label" value="autoarchive2d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="noreply@email.apple.com"/>
+    <apps:property name="subject" value="added to “Carlciano Family” calendar."/>
+    <apps:property name="label" value="autoarchive7d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="noreply@email.apple.com"/>
+    <apps:property name="subject" value="deleted from “Carlciano Family” calendar."/>
+    <apps:property name="label" value="autoarchive7d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Backup Finished Successfully"/>
+    <apps:property name="label" value="backups/ramon"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@comcast.net"/>
+    <apps:property name="subject" value="birthdays this week"/>
+    <apps:property name="label" value="autoarchive2d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Arq Serenity backup (0 errors)"/>
+    <apps:property name="label" value="autoarchive2d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="hasTheWord" value="list:email.superhuman.com"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_personal"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="&quot;statefarminfo.com&quot;"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_personal"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="&quot;SantanderInforma@emailing.bancosantander-mail.es&quot;"/>
+    <apps:property name="shouldTrash" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="&quot;noreply@ismfast.com&quot;"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_personal"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="&quot;careteam@honorcare.com&quot;"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_personal"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="*@superhuman.com -sharing@superhuman.com"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_personal"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="&quot;noor.m@insightinnovatorss.online&quot;"/>
+    <apps:property name="shouldTrash" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="&quot;memo@whispermemos.com&quot;"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_personal"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="“birthdays this week:”"/>
+    <apps:property name="label" value="autoarchive2d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Radarr [Movie]"/>
+    <apps:property name="label" value="autoarchive2d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="notifications@nest.com"/>
+    <apps:property name="subject" value="Your camera is offline"/>
+    <apps:property name="label" value="autoarchive7d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="linkedin"/>
+    <apps:property name="hasTheWord" value="&quot;start a conversation with your new connection&quot;"/>
+    <apps:property name="label" value="LinkedIn/LinkedIn Connections"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="non-mail-user@vmail.mywavephone.com"/>
+    <apps:property name="subject" value="FELCIANO"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="newsletter@mailing.claro.com.pe"/>
+    <apps:property name="hasTheWord" value="Feliciano"/>
+    <apps:property name="shouldTrash" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Back up Astrid MacBookAir to Arq8 on Pharos"/>
+    <apps:property name="label" value="backups/astrid"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Serenity, Clarity and The Vault to Arq12 on Pharos"/>
+    <apps:property name="label" value="backups/ramon"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Serenity, Clarity and The Vault on Arq6"/>
+    <apps:property name="label" value="backups/ramon"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Arq6 on Air 2020"/>
+    <apps:property name="label" value="backups/emma"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Back up all MacBook Air 2020 drives to Masonic Temple"/>
+    <apps:property name="label" value="backups/emma"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Back up all MacBook Air 2020 drives to Arq6 on Pharos (0 errors)"/>
+    <apps:property name="label" value="backups/emma"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Serenity, Clarity and The Vault to Arq12 on Pharos (0 errors)"/>
+    <apps:property name="label" value="backups/ramon"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="Back up Astrid MacBookAir to Arq8 on Pharos (0 errors)"/>
+    <apps:property name="label" value="backups/astrid"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="no-reply@researchgatemail.net"/>
+    <apps:property name="label" value="[ia]/ResearchGate"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="no_reply@email.apple.com"/>
+    <apps:property name="subject" value="Your Subscription Renewal"/>
+    <apps:property name="label" value="Receipts To File/iTunes Purchases"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="apps-scripts-notifications@google.com"/>
+    <apps:property name="label" value="alert-me/google-scripts-notif"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="CDSR"/>
+    <apps:property name="label" value="financial/daily spending"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="subject" value="CDSR"/>
+    <apps:property name="label" value="[ia]/Carlciano Spending"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="hasTheWord" value="from:superorganizers OR from:noreply@medium.com OR from:hello@every.to"/>
+    <apps:property name="label" value="[ia]/Newsletters"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="alphasights.com OR glgroup.com OR thirdbridge.com OR guidepointglobal.com OR graphite.com OR guidepoint.com OR prosapient.com)"/>
+    <apps:property name="label" value="[ia]/Expert Networks"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="synologynotification.com OR alerts@notify.wellsfargo.com"/>
+    <apps:property name="label" value="[ia]/Notifications"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="jobalerts-noreply@linkedin.com"/>
+    <apps:property name="label" value="[ia]/Job Alerts"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="parentsquare.com OR littlemissionstudio.com"/>
+    <apps:property name="label" value="[ia]/Synergy"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="non-mail-user@vmail.mywavephone.com"/>
+    <apps:property name="label" value="[ia]/VoiceMail"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="subject" value="NETGEAR PortOfNewPicton Log"/>
+    <apps:property name="label" value="logs"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="subject" value="&quot;black friday&quot; OR &quot;cybermonday&quot; OR &quot;cyber monday&quot;"/>
+    <apps:property name="label" value="black-friday"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="hasTheWord" value="&quot;global BIO-India&quot;"/>
+    <apps:property name="label" value="[ia]/Global Bio India 2023"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="hasTheWord" value="list:(&lt;worldwide.ctolunches.groups.io&gt;)"/>
+    <apps:property name="label" value="lists/ctolunches"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="halcyonschool.com"/>
+    <apps:property name="label" value="[ia]/Halcyon"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="octopus.energy"/>
+    <apps:property name="label" value="utilities/octopus.energy"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="no-reply@classroom.google.com"/>
+    <apps:property name="subject" value="Daily Summary"/>
+    <apps:property name="label" value="classroom"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="cosmeticdentistryassociates.net OR hallszeto.com"/>
+    <apps:property name="label" value="healthcare/ramon"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="donotreplyucsfmychart@ucsf.edu"/>
+    <apps:property name="hasTheWord" value="&quot;You have a new message in UCSF MyChart&quot;"/>
+    <apps:property name="label" value="alert-me/health"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="donotreplyucsfmychart@ucsf.edu"/>
+    <apps:property name="hasTheWord" value="&quot;There is a new message for Rita Felciano in UCSF MyChart&quot;"/>
+    <apps:property name="label" value="healthcare/notification-regular-rita"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="donotreplyucsfmychart@ucsf.edu"/>
+    <apps:property name="hasTheWord" value="&quot;A new message has been sent to Emma Carlson in MyChart&quot;"/>
+    <apps:property name="label" value="healthcare/notification-regular-emma"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="alerts@notify.wellsfargo.com"/>
+    <apps:property name="subject" value="Your mortgage statement is ready"/>
+    <apps:property name="hasTheWord" value="&quot;Here's the latest for account Mortgage&quot;"/>
+    <apps:property name="label" value="alert-me-not/wells-fargo"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="alerts@notify.wellsfargo.com"/>
+    <apps:property name="subject" value="Your statement for account"/>
+    <apps:property name="hasTheWord" value="&quot;Your month in review&quot;"/>
+    <apps:property name="label" value="alert-me-not/wells-fargo"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_notification"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="alerts@notify.wellsfargo.com"/>
+    <apps:property name="subject" value="&quot;Account update&quot;"/>
+    <apps:property name="hasTheWord" value="&quot;Here is the update you requested for your Wells Fargo account&quot;"/>
+    <apps:property name="label" value="alert-me-not/wells-fargo"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="smartLabelToApply" value="^smartlabel_notification"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="no-reply@mail.evernote.com"/>
+    <apps:property name="subject" value="&quot;Note shared with you&quot;"/>
+    <apps:property name="label" value="alert-me/note-shared-with-me"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="staticforms.xyz"/>
+    <apps:property name="label" value="alert-me/static-forms-notif"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="Synologynotification.com"/>
+    <apps:property name="label" value="alert-me/synology-notif"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="covered.ca.gov"/>
+    <apps:property name="label" value="alert-me/health"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="surveys@guidepoint.com"/>
+    <apps:property name="label" value="[ia]/Expert Networks"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="(alphasights.com OR glgroup.com OR thirdbridge.com OR guidepointglobal.com OR graphite.com OR guidepoint.com OR prosapient.com)"/>
+    <apps:property name="subject" value="survey"/>
+    <apps:property name="label" value="[ia]/Expert Networks/survey-request"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="noreply@us2.make.com"/>
+    <apps:property name="subject" value="Encountered AND (warning OR error) ([PFM] OR [SO)"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <content/>
+    <apps:property name="from" value="noreply@us2.make.com"/>
+    <apps:property name="subject" value="Encountered AND (warning OR error) AND ([PFM] OR [SO)"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+</feed>

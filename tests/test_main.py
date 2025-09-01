@@ -1,8 +1,10 @@
 from io import StringIO
+import sys
 
 import pytest
 
-from gmail_yaml_filters.main import load_data_from_args
+from gmail_yaml_filters.main import load_yaml_filters
+from gmail_yaml_filters.ruleset import RuleSet
 
 
 @pytest.fixture
@@ -19,28 +21,37 @@ def tmpconfig(tmp_path):
     return fpath
 
 
-def test_delete_requires_no_file():
-    assert load_data_from_args("delete", None) == []
+def test_load_yaml_from_stdin(monkeypatch):
+    monkeypatch.setattr("sys.stdin", StringIO("- has: attachment\n  archive: true"))
+    ruleset = load_yaml_filters("-")
+    assert isinstance(ruleset, RuleSet)
+    assert len(ruleset.rules) == 1
 
 
-def test_load_data_from_stdin(monkeypatch):
-    monkeypatch.setattr("sys.stdin", StringIO("foo: bar"))
-    assert load_data_from_args("upload", "-") == [{"foo": "bar"}]
+def test_load_yaml_from_filename(tmpconfig):
+    ruleset = load_yaml_filters(str(tmpconfig))
+    assert isinstance(ruleset, RuleSet)
+    assert len(ruleset.rules) == 2
 
 
-def test_load_data_from_filename(tmpconfig):
-    assert load_data_from_args("upload", tmpconfig) == [
-        {
-            "has": "attachment",
-            "archive": True,
-        },
-        {
-            "to": "alice",
-            "label": "foo",
-        },
-    ]
+def test_load_yaml_handles_single_rule(tmp_path):
+    fpath = tmp_path / "single.yaml"
+    fpath.write_text("has: attachment\narchive: true")
+    ruleset = load_yaml_filters(str(fpath))
+    assert isinstance(ruleset, RuleSet)
+    assert len(ruleset.rules) == 1
 
 
-def test_load_data_fails_without_filename():
-    with pytest.raises(ValueError):
-        load_data_from_args("upload", "")
+def test_load_yaml_ignores_rules_with_ignore_flag(tmp_path):
+    fpath = tmp_path / "ignored.yaml"
+    fpath.write_text(
+        """
+        - has: attachment
+          archive: true
+        - to: alice
+          label: foo
+          ignore: true
+        """
+    )
+    ruleset = load_yaml_filters(str(fpath))
+    assert len(ruleset.rules) == 1  # Only one rule, the ignored one is filtered out

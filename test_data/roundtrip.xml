@@ -1,0 +1,1017 @@
+<?xml version='1.0' encoding='utf8'?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:apps="http://schemas.google.com/apps/2006">
+  <title>Mail Filters</title>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:6507338332673262783</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;Google Alerts&quot;"/>
+    <apps:property name="label" value="GoogleAlerts"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8824539373214077797</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;felciano@cnmat.berkeley.edu OR ECarlson@wsgc.com OR rmtfelciano@earthlink.net&quot;"/>
+    <apps:property name="shouldStar" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:300481694007186423</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@ingenuity.com"/>
+    <apps:property name="label" value="IngenuityFlagged"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="FW"/>
+    <apps:property name="to" value="felciano@yahoo.com"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2459390158467695918</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;fitpregnancy@email.fitpregnancy.com OR thebump@email.thebump.com&quot;"/>
+    <apps:property name="label" value="lists/baby"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3245175328402630244</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;mailer@sparkpeople.com OR office@mvnutrition.com OR audrey@notakeout.com&quot;"/>
+    <apps:property name="label" value="healthcare/wellness"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7428206944690930616</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;ealerts@ybca.org OR editor@somalit.com OR Weekly_Connections@citysearch.com OR public_relations@citysearch.com OR events@eventful.com&quot;"/>
+    <apps:property name="label" value="fun/What's Going On"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1561779844571363112</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="newsletter@metrowize.com"/>
+    <apps:property name="label" value="fun/What's Going On"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3162713947527507619</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;Plaxo Birthday Reminder&quot;"/>
+    <apps:property name="label" value="birthday-soon"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1249621703389825238</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="viewtrip-admin@galileo.com"/>
+    <apps:property name="label" value="itineraries"/>
+    <apps:property name="subject" value="Itinerary"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4290039761148906158</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="wellsfargo.com"/>
+    <apps:property name="label" value="financial/updates"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Wells Fargo Checking Account Update&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:6239173183658362539</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="americanexpress@welcome.aexp.com"/>
+    <apps:property name="label" value="financial/notifications"/>
+    <apps:property name="shouldStar" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3497898786638342957</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="Billpay@wellsfargo.com"/>
+    <apps:property name="hasTheWord" value="&quot;Expected Bill Not Received&quot;"/>
+    <apps:property name="label" value="financial/attention!"/>
+    <apps:property name="shouldStar" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2991131004345658547</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="noreply@townhog.com"/>
+    <apps:property name="label" value="lists/townhog"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7117298818518061610</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="email03.sbc.com"/>
+    <apps:property name="label" value="financial/notifications"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;bill is ready to view and print&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1806679572470506621</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="support@tripit.com"/>
+    <apps:property name="label" value="tripinfo"/>
+    <apps:property name="subject" value="&quot;welcome to&quot; OR &quot;departure summary&quot; OR &quot;check-in reminder&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3690864626577750634</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="unitedeasycheckin@unitedeco.p0.com"/>
+    <apps:property name="label" value="tripinfo"/>
+    <apps:property name="subject" value="&quot;Online check-in is now available&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4447675529273638798</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="ofsrep.alert_osn@wellsfargo.com"/>
+    <apps:property name="label" value="financial/statements"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1974031008357838611</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="label" value="digitalalchemy"/>
+    <apps:property name="to" value="&quot;felciano@digitalalchemy.com&quot; OR &quot;info@digitalalchemy.com&quot; OR &quot;ramon@digitalalchemy.com&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7894639591404693875</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;deals@livingsocial.com OR google-offers@offers.google.com OR mail@e.groupon.com OR deals@memberdealsusa.com&quot;"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8396191443046303605</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="to" value="bottlepy.googlegroups.com"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1026879941696237204</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="recipes@dm.email.epicurious.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:198512321883362830</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="babette@bakespace.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2576451537044186879</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="aviva@thescramble.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7927578320634927782</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="MealsMatter@mail65.subscribermail.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1229580947786987610</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="email@allrecipes.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:95150836899856264</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="Billpay@wellsfargo.com"/>
+    <apps:property name="label" value="Notifications/Financial"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2651279896908903966</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="sbc.com"/>
+    <apps:property name="label" value="Notifications/Financial"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Reminder to pay&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:6086477122921588673</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="doesNotHaveTheWord" value="&quot;Wells Fargo Checking Account Balance Update&quot; OR &quot;Wells Fargo Checking Account Update&quot;"/>
+    <apps:property name="from" value="&quot;ofsrep.alert_cda@wellsfargo.com OR chase@alerts.chase.com OR billing@37signals.com OR ofsrep.alert_cuk@wellsfargo.com&quot;"/>
+    <apps:property name="label" value="Notifications/Financial"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:132091235632423867</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;nextdoor@nextdoor.com OR reply@nextdoor.com&quot;"/>
+    <apps:property name="hasTheWord" value="&quot;was intended for felciano@yahoo.com&quot;"/>
+    <apps:property name="label" value="Social Updates/Nextdoor"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1205259196629764972</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="themove@thrillist.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5521486533005003354</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;Bay Area LifeTech&quot;"/>
+    <apps:property name="label" value="Professional Networking Local"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:375203644124947922</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="IGNORETHISFILTER"/>
+    <apps:property name="hasTheWord" value="category:promotions"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1224119492325676954</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;donotreply@frenchamericansf.myenotice.com OR frenchamericansf.org OR internationalsf.org&quot;"/>
+    <apps:property name="label" value="FAIS"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4719336255307391649</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="hasTheWord" value="&quot;register&quot; from:mileageplus_partner@news.united.com OR to:mileageplus_partner@news.united.com"/>
+    <apps:property name="label" value="airlines/Mileage Plus Offers"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8648548277575598173</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="forwardTo" value="emma@emmacarlson.com"/>
+    <apps:property name="from" value="jamortega@yahoo.com"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3624137998697977087</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="hasTheWord" value="list:(bmi-colloquia-tu.lists.stanford.edu)"/>
+    <apps:property name="label" value="lists/BMI"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4648393105761873797</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="hasTheWord" value="list:(bmir-colloquia-th.lists.stanford.edu)"/>
+    <apps:property name="label" value="lists/BMI"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8297171774047074572</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="capitalone@service.capitalone.com"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="shouldStar" value="true"/>
+    <apps:property name="subject" value="&quot;wasn't processed&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2757525510735072462</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="no_reply@email.apple.com"/>
+    <apps:property name="label" value="Receipts To File/iTunes Purchases"/>
+    <apps:property name="subject" value="&quot;Your receipt from Apple.&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:6280446701018970258</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Arq Serenity backup (0 errors)&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4749260992108620571</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="label" value="autoarchive3d"/>
+    <apps:property name="subject" value="&quot;Pharos Alert: Updates are available for packages on Pharos&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7482692139793939375</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="alerts@alerts.craigslist.org"/>
+    <apps:property name="hasTheWord" value="&quot;new result for search terms&quot;"/>
+    <apps:property name="label" value="autoarchive2d"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4834307837971196276</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="noreply@email.apple.com"/>
+    <apps:property name="label" value="autoarchive7d"/>
+    <apps:property name="subject" value="&quot;added to “Carlciano Family” calendar.&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3282321480511173657</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="noreply@email.apple.com"/>
+    <apps:property name="label" value="autoarchive7d"/>
+    <apps:property name="subject" value="&quot;deleted from “Carlciano Family” calendar.&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1945944447034307020</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/ramon"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Backup Finished Successfully&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8059432006913781368</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@comcast.net"/>
+    <apps:property name="label" value="autoarchive2d"/>
+    <apps:property name="subject" value="&quot;birthdays this week&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8395257452215289901</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="autoarchive2d"/>
+    <apps:property name="subject" value="&quot;Arq Serenity backup (0 errors)&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5576565835587445796</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="hasTheWord" value="list:email.superhuman.com"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:829059872786035227</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;SantanderInforma@emailing.bancosantander-mail.es&quot;"/>
+    <apps:property name="shouldTrash" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7600774998952368316</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;noreply@ismfast.com&quot;"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:6293925795121753870</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;careteam@honorcare.com&quot;"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5725743338621674540</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;*@superhuman.com -sharing@superhuman.com&quot;"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2447550437446245792</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;noor.m@insightinnovatorss.online&quot;"/>
+    <apps:property name="shouldTrash" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7359109058799115828</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;memo@whispermemos.com&quot;"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4974842786722460204</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="autoarchive2d"/>
+    <apps:property name="subject" value="&quot;“birthdays this week:”&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7331876783046246918</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="autoarchive2d"/>
+    <apps:property name="subject" value="&quot;Radarr [Movie]&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:675884291841551275</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="notifications@nest.com"/>
+    <apps:property name="label" value="autoarchive7d"/>
+    <apps:property name="subject" value="&quot;Your camera is offline&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:9177853533885818819</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="linkedin"/>
+    <apps:property name="hasTheWord" value="&quot;start a conversation with your new connection&quot;"/>
+    <apps:property name="label" value="LinkedIn/LinkedIn Connections"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3773480995920188991</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="non-mail-user@vmail.mywavephone.com"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+    <apps:property name="subject" value="FELCIANO"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5016294441955374013</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="newsletter@mailing.claro.com.pe"/>
+    <apps:property name="hasTheWord" value="Feliciano"/>
+    <apps:property name="shouldTrash" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4453554981831343558</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/astrid"/>
+    <apps:property name="subject" value="&quot;Back up Astrid MacBookAir to Arq8 on Pharos&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4680401650401445817</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/ramon"/>
+    <apps:property name="subject" value="&quot;Serenity, Clarity and The Vault to Arq12 on Pharos&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:9101042320069158162</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/ramon"/>
+    <apps:property name="subject" value="&quot;Serenity, Clarity and The Vault on Arq6&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:277790815326956629</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/emma"/>
+    <apps:property name="subject" value="&quot;Arq6 on Air 2020&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:238837904395445826</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/emma"/>
+    <apps:property name="subject" value="&quot;Back up all MacBook Air 2020 drives to Masonic Temple&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3992060257639297413</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/emma"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Back up all MacBook Air 2020 drives to Arq6 on Pharos (0 errors)&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3367706758941925116</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/ramon"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Serenity, Clarity and The Vault to Arq12 on Pharos (0 errors)&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4461863369855031813</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="backups/astrid"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Back up Astrid MacBookAir to Arq8 on Pharos (0 errors)&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2398046001671735321</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="no-reply@researchgatemail.net"/>
+    <apps:property name="label" value="[ia]/ResearchGate"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2169325518444784915</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="no_reply@email.apple.com"/>
+    <apps:property name="label" value="Receipts To File/iTunes Purchases"/>
+    <apps:property name="subject" value="&quot;Your Subscription Renewal&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7570212287475927512</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="apps-scripts-notifications@google.com"/>
+    <apps:property name="label" value="alert-me/google-scripts-notif"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2928014465744336383</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="financial/daily spending"/>
+    <apps:property name="subject" value="CDSR"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7501438828195447032</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="label" value="[ia]/Carlciano Spending"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+    <apps:property name="subject" value="CDSR"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1507716365625506746</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="hasTheWord" value="&quot;from:superorganizers OR from:noreply@medium.com OR from:hello@every.to&quot;"/>
+    <apps:property name="label" value="[ia]/Newsletters"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2138333726083145395</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;alphasights.com OR glgroup.com OR thirdbridge.com OR guidepointglobal.com OR graphite.com OR guidepoint.com OR prosapient.com)&quot;"/>
+    <apps:property name="label" value="[ia]/Expert Networks"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8099142255883971822</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;synologynotification.com OR alerts@notify.wellsfargo.com&quot;"/>
+    <apps:property name="label" value="[ia]/Notifications"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2855195750046274305</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="jobalerts-noreply@linkedin.com"/>
+    <apps:property name="label" value="[ia]/Job Alerts"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2653504429559764554</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;parentsquare.com OR littlemissionstudio.com&quot;"/>
+    <apps:property name="label" value="[ia]/Synergy"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8665749874355522944</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="non-mail-user@vmail.mywavephone.com"/>
+    <apps:property name="label" value="[ia]/VoiceMail"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4117271619296707673</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="felciano@gmail.com"/>
+    <apps:property name="label" value="logs"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;NETGEAR PortOfNewPicton Log&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5908936349500155053</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="label" value="black-friday"/>
+    <apps:property name="subject" value="&quot;black friday&quot; OR &quot;cybermonday&quot; OR &quot;cyber monday&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8926136713823365913</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="hasTheWord" value="&quot;global BIO-India&quot;"/>
+    <apps:property name="label" value="[ia]/Global Bio India 2023"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3053792972119807207</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="hasTheWord" value="list:(&lt;worldwide.ctolunches.groups.io&gt;)"/>
+    <apps:property name="label" value="lists/ctolunches"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5241775819721634107</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="halcyonschool.com"/>
+    <apps:property name="label" value="[ia]/Halcyon"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7244736725487177287</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="octopus.energy"/>
+    <apps:property name="label" value="utilities/octopus.energy"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2155482157670415347</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="no-reply@classroom.google.com"/>
+    <apps:property name="label" value="classroom"/>
+    <apps:property name="subject" value="&quot;Daily Summary&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5510953341848198853</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="&quot;cosmeticdentistryassociates.net OR hallszeto.com&quot;"/>
+    <apps:property name="label" value="healthcare/ramon"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5254071786191906401</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="donotreplyucsfmychart@ucsf.edu"/>
+    <apps:property name="hasTheWord" value="&quot;You have a new message in UCSF MyChart&quot;"/>
+    <apps:property name="label" value="alert-me/health"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3119669252404548679</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="donotreplyucsfmychart@ucsf.edu"/>
+    <apps:property name="hasTheWord" value="&quot;There is a new message for Rita Felciano in UCSF MyChart&quot;"/>
+    <apps:property name="label" value="healthcare/notification-regular-rita"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="shouldNeverSpam" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:236661500001742017</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="donotreplyucsfmychart@ucsf.edu"/>
+    <apps:property name="hasTheWord" value="&quot;A new message has been sent to Emma Carlson in MyChart&quot;"/>
+    <apps:property name="label" value="healthcare/notification-regular-emma"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1068520402221191997</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="alerts@notify.wellsfargo.com"/>
+    <apps:property name="hasTheWord" value="&quot;Here's the latest for account Mortgage&quot;"/>
+    <apps:property name="label" value="alert-me-not/wells-fargo"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Your mortgage statement is ready&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:1048501010610170234</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="alerts@notify.wellsfargo.com"/>
+    <apps:property name="hasTheWord" value="&quot;Your month in review&quot;"/>
+    <apps:property name="label" value="alert-me-not/wells-fargo"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Your statement for account&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:880392501030584116</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="alerts@notify.wellsfargo.com"/>
+    <apps:property name="hasTheWord" value="&quot;Here is the update you requested for your Wells Fargo account&quot;"/>
+    <apps:property name="label" value="alert-me-not/wells-fargo"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Account update&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:3111030772683183083</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="no-reply@mail.evernote.com"/>
+    <apps:property name="label" value="alert-me/note-shared-with-me"/>
+    <apps:property name="subject" value="&quot;Note shared with you&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:8661426803768966245</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="staticforms.xyz"/>
+    <apps:property name="label" value="alert-me/static-forms-notif"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:4833433387189942276</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="Synologynotification.com"/>
+    <apps:property name="label" value="alert-me/synology-notif"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:5434961107113612126</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="covered.ca.gov"/>
+    <apps:property name="label" value="alert-me/health"/>
+    <apps:property name="shouldAlwaysMarkAsImportant" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:6389837706052328696</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="surveys@guidepoint.com"/>
+    <apps:property name="label" value="[ia]/Expert Networks"/>
+    <apps:property name="shouldArchive" value="true"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2873776977793739889</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="(alphasights.com OR glgroup.com OR thirdbridge.com OR guidepointglobal.com OR graphite.com OR guidepoint.com OR prosapient.com)"/>
+    <apps:property name="label" value="[ia]/Expert Networks/survey-request"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="survey"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:7898061816786790674</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="noreply@us2.make.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Encountered AND (warning OR error) ([PFM] OR [SO)&quot;"/>
+  </entry>
+  <entry>
+    <category term="filter"/>
+    <title>Mail Filter</title>
+    <id>tag:mail.google.com,2008:filter:2968916625200224230</id>
+    <updated>2025-08-28T21:43:31Z</updated>
+    <content/>
+    <apps:property name="from" value="noreply@us2.make.com"/>
+    <apps:property name="shouldArchive" value="true"/>
+    <apps:property name="subject" value="&quot;Encountered AND (warning OR error) AND ([PFM] OR [SO)&quot;"/>
+  </entry>
+</feed>
+

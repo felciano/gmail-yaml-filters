@@ -1,0 +1,46 @@
+======================================================================
+GMAIL XML TO YAML CONVERSION REPORT
+======================================================================
+
+📊 CONVERSION SUMMARY:
+  Total filters processed: 103
+  Successfully converted: 103
+  Filters with unsupported properties: 73
+  Filters missing actions: 2
+
+⚠️  UNSUPPORTED PROPERTIES:
+These Gmail features are not supported by gmail-yaml-filters:
+
+  • sizeOperator: 66 occurrences
+    Size comparison operator (greater/less than)
+
+  • sizeUnit: 66 occurrences
+    Size unit specification (KB/MB)
+
+  • smartLabelToApply: 10 occurrences
+    Gmail smart labels (Social, Promotions, Updates, Forums)
+
+🚫 FILTERS WITHOUT ACTIONS:
+These filters have conditions but no actions and may not work:
+
+  Filter #3:
+    from: (covered.ca.gov OR  donotreplyucsfmychart@ucsf.edu OR  cosmeticdentistryassociates.net OR  hallszeto.com OR  mailer@sparkpeople.com OR  office@mvnutrition.com OR  audrey@notakeout.com OR  cosmeticdentistryassociates.net OR  donotreplyucsfmychart@ucsf.edu OR  rob@pacificanxietygroup.com OR  protonintlondon.com OR  thelondonclinic.co.uk OR  uclh.nhs.uk OR  refer.nhs.uk OR  Maggies.London@maggiescentres.org)
+
+  Filter #50:
+    from: "statefarminfo.com"
+
+💡 RECOMMENDATIONS:
+  • Size-based filters: Consider using 'larger:' or 'smaller:' 
+    in the 'has' field (e.g., has: 'larger:10M')
+
+  • Smart labels: These Gmail categories (Social, Promotions, etc.)
+    cannot be set via filters. Consider using regular labels instead.
+
+  • Filters without actions: Add at least one action like 'label',
+    'archive', or 'star' to make these filters functional.
+
+✅ NEXT STEPS:
+  1. Review the generated YAML file
+  2. Manually add any missing functionality
+  3. Test with: gmail-yaml-filters <output_file.yaml>
+  4. Consider keeping original XML as backup

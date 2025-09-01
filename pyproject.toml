@@ -21,6 +21,12 @@ PyYAML = "^6.0"
 [tool.poetry.scripts]
 gmail-yaml-filters = "gmail_yaml_filters.main:main"
 
+[tool.poetry.group.dev.dependencies]
+mock = "^5.2.0"
+pytest = "^8.4.1"
+pytest-mock = "^3.14.1"
+pytest-cov = "^6.2.1"
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
