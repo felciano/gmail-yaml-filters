@@ -185,6 +185,26 @@ Examples:
         action='store_true',
         help='Show detailed validation information'
     )
+    validate_parser.add_argument(
+        '--smart-clean',
+        action='store_true',
+        help='Remove meaningless Gmail defaults during conversion'
+    )
+    validate_parser.add_argument(
+        '--filter-merging',
+        choices=['none', 'conservative', 'aggressive', 'interactive'],
+        default='none',
+        help='Filter merging and inference level for validation. '
+             'none: No merging or inference. '
+             'conservative: Merge identical filters, infer safe hierarchies and operators. '
+             'aggressive: More aggressive merging with subset detection. '
+             'interactive: Show safety analysis and prompt for each merge.'
+    )
+    validate_parser.add_argument(
+        '--preserve-raw',
+        action='store_true',
+        help='Preserve all raw Gmail properties during conversion'
+    )
     
     # ========== SYNC command (upload + prune) ==========
     sync_parser = subparsers.add_parser(
@@ -421,21 +441,56 @@ def cmd_validate(args):
         print(f"Please check the file path and try again.", file=sys.stderr)
         sys.exit(1)
     
+    # Parse filter merging level
+    merging_level = args.filter_merging if hasattr(args, 'filter_merging') else 'none'
+    
+    # Set options based on merging level
+    merge_filters = merging_level != 'none'
+    infer_more = merging_level in ['conservative', 'aggressive', 'interactive']
+    infer_operators = merging_level != 'none'
+    
+    # Map merging level to strategy
+    if merging_level == 'none':
+        infer_strategy = 'conservative'  # Won't be used
+    elif merging_level == 'conservative':
+        infer_strategy = 'conservative'
+    elif merging_level == 'aggressive':
+        infer_strategy = 'aggressive'
+    elif merging_level == 'interactive':
+        infer_strategy = 'interactive'
+    else:
+        infer_strategy = 'conservative'
+    
+    # Create converter with all options
     converter = GmailFilterConverter(
-        preserve_raw=True,
+        preserve_raw=args.preserve_raw if hasattr(args, 'preserve_raw') else True,
+        smart_clean=args.smart_clean if hasattr(args, 'smart_clean') else False,
+        merge_filters=merge_filters,
+        infer_more=infer_more,
+        infer_strategy=infer_strategy,
+        infer_operators=infer_operators,
         verbose=args.verbose or True  # Always show some output for validation
     )
     
     try:
-        print(f"🔄 Validating round-trip conversion for {args.xml_file}...", file=sys.stderr)
+        if merging_level != 'none':
+            print(f"🔄 Validating round-trip conversion for {args.xml_file} with {merging_level} merging...", file=sys.stderr)
+        else:
+            print(f"🔄 Validating round-trip conversion for {args.xml_file}...", file=sys.stderr)
+            
         is_valid = converter.validate_round_trip(args.xml_file)
         stats = converter.get_stats()
         
         if is_valid:
             print(f"✅ SUCCESS: All {stats['total_filters']} filters preserved correctly", file=sys.stderr)
+            if merging_level != 'none':
+                print(f"   Validation passed with {merging_level} filter merging", file=sys.stderr)
             sys.exit(0)
         else:
             print(f"❌ FAILED: Round-trip validation failed", file=sys.stderr)
+            if merging_level != 'none':
+                print(f"   Note: Validation with merging enabled may fail as merging changes filter structure", file=sys.stderr)
+                print(f"   Try --filter-merging=none for strict round-trip validation", file=sys.stderr)
             sys.exit(1)
     
     except Exception as e:
