@@ -120,10 +120,21 @@ class OperatorInference:
         Returns:
             'any' operator structure or None
         """
+        # Check if the entire expression is wrapped in parentheses
+        # e.g., "(term1 OR term2 OR term3)"
+        stripped_value = value
+        if value.startswith('(') and value.endswith(')'):
+            # Check if these are matching outer parentheses (not part of terms)
+            # by ensuring balanced parentheses when we remove them
+            inner = value[1:-1]
+            if ' OR ' in inner:
+                # Use the inner content for OR processing
+                stripped_value = inner
+        
         # Pattern 1: Explicit OR
         # Examples: "alice OR bob", "alice@example.com OR bob@example.com"
         or_pattern = r'^(.+?)\s+OR\s+(.+)$'
-        match = re.match(or_pattern, value)
+        match = re.match(or_pattern, stripped_value)
         if match:
             terms = [match.group(1).strip(), match.group(2).strip()]
             # Check for additional ORs
@@ -138,6 +149,7 @@ class OperatorInference:
         
         # Pattern 2: Curly braces (Gmail's OR shorthand)
         # Example: "{alice bob charlie}"
+        # Use original value, not stripped_value for other patterns
         curly_pattern = r'^\{([^}]+)\}$'
         match = re.match(curly_pattern, value)
         if match:
