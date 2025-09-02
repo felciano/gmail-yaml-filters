@@ -320,6 +320,12 @@ def get_gmail_service_for_file(yaml_file, client_secret, credential_store, dry_r
 
 def cmd_export(args):
     """Handle the export command (YAML to XML)."""
+    # Check if input file exists (unless it's stdin)
+    if args.yaml_file != '-' and not Path(args.yaml_file).exists():
+        print(f"Error: YAML file '{args.yaml_file}' not found", file=sys.stderr)
+        print(f"Please check the file path and try again.", file=sys.stderr)
+        sys.exit(1)
+    
     ruleset = load_yaml_filters(args.yaml_file)
     xml_output = ruleset_to_xml(ruleset)
     
@@ -333,6 +339,12 @@ def cmd_export(args):
 
 def cmd_convert(args):
     """Handle the convert command (bidirectional)."""
+    # Check if input file exists
+    if not Path(args.input_file).exists():
+        print(f"Error: Input file '{args.input_file}' not found", file=sys.stderr)
+        print(f"Please check the file path and try again.", file=sys.stderr)
+        sys.exit(1)
+    
     # Detect input format
     input_format = detect_file_format(args.input_file)
     
@@ -403,6 +415,12 @@ def cmd_convert(args):
 
 def cmd_validate(args):
     """Handle the validate command (round-trip validation)."""
+    # Check if input file exists
+    if not Path(args.xml_file).exists():
+        print(f"Error: XML file '{args.xml_file}' not found", file=sys.stderr)
+        print(f"Please check the file path and try again.", file=sys.stderr)
+        sys.exit(1)
+    
     converter = GmailFilterConverter(
         preserve_raw=True,
         verbose=args.verbose or True  # Always show some output for validation
@@ -427,6 +445,12 @@ def cmd_validate(args):
 
 def cmd_sync(args):
     """Handle the sync command (upload + prune)."""
+    # Check if input file exists
+    if not Path(args.yaml_file).exists():
+        print(f"Error: YAML file '{args.yaml_file}' not found", file=sys.stderr)
+        print(f"Please check the file path and try again.", file=sys.stderr)
+        sys.exit(1)
+    
     ruleset = load_yaml_filters(args.yaml_file)
     service = get_gmail_service_for_file(
         args.yaml_file, args.client_secret, args.credential_store, args.dry_run
@@ -452,6 +476,12 @@ def cmd_sync(args):
 
 def cmd_upload(args):
     """Handle the upload command."""
+    # Check if input file exists
+    if not Path(args.yaml_file).exists():
+        print(f"Error: YAML file '{args.yaml_file}' not found", file=sys.stderr)
+        print(f"Please check the file path and try again.", file=sys.stderr)
+        sys.exit(1)
+    
     ruleset = load_yaml_filters(args.yaml_file)
     service = get_gmail_service_for_file(
         args.yaml_file, args.client_secret, args.credential_store, args.dry_run
@@ -462,6 +492,12 @@ def cmd_upload(args):
 
 def cmd_prune(args):
     """Handle the prune command."""
+    # Check if input file exists
+    if not Path(args.yaml_file).exists():
+        print(f"Error: YAML file '{args.yaml_file}' not found", file=sys.stderr)
+        print(f"Please check the file path and try again.", file=sys.stderr)
+        sys.exit(1)
+    
     ruleset = load_yaml_filters(args.yaml_file)
     service = get_gmail_service_for_file(
         args.yaml_file, args.client_secret, args.credential_store, args.dry_run
