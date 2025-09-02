@@ -669,10 +669,16 @@ class GmailFilterConverter:
         
         return True
     
-    def _has_value_extends(self, parent_value: str, child_value: str) -> bool:
+    def _has_value_extends(self, parent_value: Union[str, Dict], child_value: Union[str, Dict]) -> bool:
         """
         Check if child's 'has' value extends parent's (includes it as substring or AND condition).
         """
+        # Handle dict values from operator inference
+        if isinstance(parent_value, dict) or isinstance(child_value, dict):
+            # Can't do simple string comparison with dicts
+            # For now, consider them as not extending if either is a dict
+            return False
+        
         # Simple containment check
         if parent_value in child_value:
             return True
@@ -763,7 +769,7 @@ class GmailFilterConverter:
         
         return structured
     
-    def _simplify_has_condition(self, parent_has: str, child_has: str) -> Optional[str]:
+    def _simplify_has_condition(self, parent_has: Union[str, Dict], child_has: Union[str, Dict]) -> Optional[Union[str, Dict]]:
         """
         Try to simplify child's 'has' condition by removing parent's part.
         
@@ -776,6 +782,11 @@ class GmailFilterConverter:
             child: "(pull request AND review requested)"
             returns: "review requested"
         """
+        # Handle dict values from operator inference
+        if isinstance(parent_has, dict) or isinstance(child_has, dict):
+            # Can't simplify dicts, return child as-is
+            return child_has
+        
         # Handle AND pattern with parentheses
         if child_has.startswith('(') and ' AND ' in child_has:
             child_clean = child_has.strip('()')
