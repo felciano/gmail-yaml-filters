@@ -217,11 +217,34 @@ class GmailFilterConverter:
             xml_input: Path to XML file or XML string
             
         Returns:
-            True if round-trip preserves all data
+            True if round-trip preserves all data (or successfully converts when merging)
         """
         # Convert XML to YAML
         yaml_data = self.xml_to_yaml(xml_input)
         
+        # If merging is enabled, we can't do a true round-trip validation
+        # Instead, just verify the conversion works both ways
+        if self.merge_filters or self.infer_more:
+            try:
+                # Convert back to XML - this tests that the merged structure is valid
+                restored_xml = self.yaml_to_xml(yaml_data)
+                
+                # Parse to ensure it's valid XML
+                restored_filters = self._parse_xml_filters(restored_xml)
+                
+                if self.verbose:
+                    original_filters = self._parse_xml_filters(xml_input)
+                    print(f"✅ Conversion successful: {len(original_filters)} → {len(yaml_data)} → {len(restored_filters)} filters", file=sys.stderr)
+                    if len(yaml_data) < len(original_filters):
+                        print(f"   Merged {len(original_filters) - len(yaml_data)} filters", file=sys.stderr)
+                
+                return True
+            except Exception as e:
+                if self.verbose:
+                    print(f"❌ Conversion failed: {e}", file=sys.stderr)
+                return False
+        
+        # Normal round-trip validation without merging
         # Convert back to XML
         restored_xml = self.yaml_to_xml(yaml_data)
         

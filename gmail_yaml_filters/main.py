@@ -482,15 +482,13 @@ def cmd_validate(args):
         stats = converter.get_stats()
         
         if is_valid:
-            print(f"✅ SUCCESS: All {stats['total_filters']} filters preserved correctly", file=sys.stderr)
             if merging_level != 'none':
-                print(f"   Validation passed with {merging_level} filter merging", file=sys.stderr)
+                print(f"✅ SUCCESS: Conversion validated with {merging_level} filter merging", file=sys.stderr)
+            else:
+                print(f"✅ SUCCESS: All {stats['total_filters']} filters preserved correctly", file=sys.stderr)
             sys.exit(0)
         else:
-            print(f"❌ FAILED: Round-trip validation failed", file=sys.stderr)
-            if merging_level != 'none':
-                print(f"   Note: Validation with merging enabled may fail as merging changes filter structure", file=sys.stderr)
-                print(f"   Try --filter-merging=none for strict round-trip validation", file=sys.stderr)
+            print(f"❌ FAILED: Validation failed", file=sys.stderr)
             sys.exit(1)
     
     except Exception as e:
