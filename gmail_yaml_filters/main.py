@@ -150,6 +150,16 @@ Examples:
         help='Remove meaningless Gmail defaults from output'
     )
     convert_parser.add_argument(
+        '--filter-merging',
+        choices=['none', 'conservative', 'aggressive', 'interactive'],
+        default='none',
+        help='Filter merging and inference level (XML to YAML only). '
+             'none: No merging or inference. '
+             'conservative: Merge identical filters, infer safe hierarchies and operators. '
+             'aggressive: More aggressive merging with subset detection. '
+             'interactive: Show safety analysis and prompt for each merge.'
+    )
+    convert_parser.add_argument(
         '-v', '--verbose',
         action='store_true',
         help='Show detailed conversion information'
@@ -336,10 +346,34 @@ def cmd_convert(args):
         print(f"Error: Input and output formats are both {input_format}", file=sys.stderr)
         sys.exit(1)
     
+    # Parse filter merging level
+    merging_level = args.filter_merging if hasattr(args, 'filter_merging') else 'none'
+    
+    # Set options based on merging level
+    merge_filters = merging_level != 'none'
+    infer_more = merging_level in ['conservative', 'aggressive', 'interactive']
+    infer_operators = merging_level != 'none'
+    
+    # Map merging level to strategy
+    if merging_level == 'none':
+        infer_strategy = 'conservative'  # Won't be used
+    elif merging_level == 'conservative':
+        infer_strategy = 'conservative'
+    elif merging_level == 'aggressive':
+        infer_strategy = 'aggressive'
+    elif merging_level == 'interactive':
+        infer_strategy = 'interactive'
+    else:
+        infer_strategy = 'conservative'
+    
     # Create converter
     converter = GmailFilterConverter(
         preserve_raw=True,  # Always preserve Gmail-specific properties
         smart_clean=args.smart_clean,
+        merge_filters=merge_filters,
+        infer_more=infer_more,
+        infer_strategy=infer_strategy,
+        infer_operators=infer_operators,
         verbose=args.verbose,
         strict=args.fail_on_unsupported_properties
     )
