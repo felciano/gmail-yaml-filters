@@ -201,10 +201,20 @@ class OperatorInference:
         Returns:
             'all' operator structure or None
         """
+        # Check if the entire expression is wrapped in parentheses
+        # e.g., "(term1 AND term2 AND term3)"
+        stripped_value = value
+        if value.startswith('(') and value.endswith(')'):
+            # Check if these are matching outer parentheses (not part of terms)
+            inner = value[1:-1]
+            if ' AND ' in inner:
+                # Use the inner content for AND processing
+                stripped_value = inner
+        
         # Pattern 1: Explicit AND
         # Example: "alice AND bob"
         and_pattern = r'^(.+?)\s+AND\s+(.+)$'
-        match = re.match(and_pattern, value)
+        match = re.match(and_pattern, stripped_value)
         if match:
             terms = [match.group(1).strip(), match.group(2).strip()]
             # Check for additional ANDs
@@ -222,6 +232,7 @@ class OperatorInference:
         
         # Pattern 2: Parentheses with implicit AND
         # Example: "(term1 term2 term3)" - all must match
+        # Use original value, not stripped_value for this pattern
         paren_pattern = r'^\(([^)]+)\)$'
         match = re.match(paren_pattern, value)
         if match:
