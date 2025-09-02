@@ -333,6 +333,62 @@ class GmailFilterConverter:
         
         return filter_dict if filter_dict else None
     
+    def _flatten_filters_for_xml(self, filters: List[Dict]) -> List[Dict]:
+        """
+        Flatten filters for XML export:
+        1. Expand filters with multiple labels into separate filters
+        2. Flatten "more" structures into individual filters
+        """
+        flattened = []
+        
+        for filter_dict in filters:
+            # Handle "more" structures first
+            if 'more' in filter_dict:
+                # Process parent and children
+                parent = filter_dict.copy()
+                children = parent.pop('more')
+                
+                # Add parent filter (might still have multiple labels)
+                self._expand_filter_labels(parent, flattened)
+                
+                # Process each child filter
+                for child in children:
+                    # Child inherits all parent conditions
+                    merged_child = parent.copy()
+                    # Remove parent's action properties, keep only conditions
+                    for key in ['label', 'archive', 'delete', 'forward', 'important', 
+                               'not_important', 'not_spam', 'read', 'spam', 'star', 
+                               'trash', 'unread']:
+                        if key in merged_child:
+                            del merged_child[key]
+                    
+                    # Add child's properties (both conditions and actions)
+                    merged_child.update(child)
+                    
+                    # Expand labels if needed
+                    self._expand_filter_labels(merged_child, flattened)
+            else:
+                # No "more" structure, just expand labels if needed
+                self._expand_filter_labels(filter_dict, flattened)
+        
+        return flattened
+    
+    def _expand_filter_labels(self, filter_dict: Dict, flattened: List[Dict]):
+        """
+        If a filter has multiple labels, create separate filters for each label.
+        Gmail doesn't support multiple labels in a single filter.
+        """
+        if 'label' in filter_dict and isinstance(filter_dict['label'], list):
+            # Multiple labels - create separate filters
+            labels = filter_dict['label']
+            for label in labels:
+                filter_copy = filter_dict.copy()
+                filter_copy['label'] = label
+                flattened.append(filter_copy)
+        else:
+            # Single label or no label - add as is
+            flattened.append(filter_dict)
+    
     def _create_gmail_xml(self, filters: List[Dict]) -> str:
         """Create Gmail XML from filter dictionaries."""
         # Create root element with namespaces
@@ -346,8 +402,11 @@ class GmailFilterConverter:
         title = etree.SubElement(root, 'title')
         title.text = 'Mail Filters'
         
+        # First, flatten any "more" structures and expand multiple labels
+        flattened_filters = self._flatten_filters_for_xml(filters)
+        
         # Add each filter as an entry
-        for filter_dict in filters:
+        for filter_dict in flattened_filters:
             entry = etree.SubElement(root, 'entry')
             
             # Add category
@@ -363,17 +422,13 @@ class GmailFilterConverter:
             
             # Process standard properties
             for yaml_key, value in filter_dict.items():
-                if yaml_key == '_gmail_raw':
+                if yaml_key == '_gmail_raw' or yaml_key == 'more':
                     continue
                 
                 xml_key = self.YAML_TO_XML_MAP.get(yaml_key)
                 if xml_key:
-                    # Handle multiple labels
-                    if isinstance(value, list):
-                        for v in value:
-                            self._add_property(entry, xml_key, v, ns_map)
-                    else:
-                        self._add_property(entry, xml_key, value, ns_map)
+                    # Labels should already be single values after flattening
+                    self._add_property(entry, xml_key, value, ns_map)
             
             # Add preserved Gmail properties
             if '_gmail_raw' in filter_dict:
@@ -399,8 +454,70 @@ class GmailFilterConverter:
             value = 'true' if value else 'false'
         elif value is None:
             value = ''
+        elif isinstance(value, dict):
+            # Handle operator dictionaries - convert back to Gmail search syntax
+            value = self._operator_dict_to_string(value)
         
         prop.set('value', str(value))
+    
+    def _operator_dict_to_string(self, op_dict: Dict) -> str:
+        """
+        Convert operator dictionary back to Gmail search string.
+        Examples:
+            {'any': ['A', 'B', 'C']} -> '(A OR B OR C)'
+            {'all': ['A', 'B']} -> '(A AND B)'
+            {'not': 'A'} -> '-A'
+            {'not': {'any': ['A', 'B']}} -> '-(A OR B)'
+        """
+        if 'any' in op_dict:
+            # OR pattern - always wrap in parentheses for safety
+            terms = op_dict['any']
+            if isinstance(terms, list):
+                # Quote terms if they contain spaces
+                quoted_terms = []
+                for term in terms:
+                    if ' ' in str(term) and not (str(term).startswith('"') and str(term).endswith('"')):
+                        quoted_terms.append(f'"{term}"')
+                    else:
+                        quoted_terms.append(str(term))
+                return f"({' OR '.join(quoted_terms)})"
+            else:
+                return str(terms)
+        
+        elif 'all' in op_dict:
+            # AND pattern - wrap in parentheses
+            terms = op_dict['all']
+            if isinstance(terms, list):
+                # Quote terms if they contain spaces
+                quoted_terms = []
+                for term in terms:
+                    if isinstance(term, dict):
+                        # Nested operator
+                        quoted_terms.append(self._operator_dict_to_string(term))
+                    elif ' ' in str(term) and not (str(term).startswith('"') and str(term).endswith('"')):
+                        quoted_terms.append(f'"{term}"')
+                    else:
+                        quoted_terms.append(str(term))
+                return f"({' AND '.join(quoted_terms)})"
+            else:
+                return str(terms)
+        
+        elif 'not' in op_dict:
+            # NOT pattern
+            value = op_dict['not']
+            if isinstance(value, dict):
+                # Nested operator like {'not': {'any': ['A', 'B']}}
+                return f"-{self._operator_dict_to_string(value)}"
+            else:
+                # Simple negation
+                if ' ' in str(value) and not (str(value).startswith('"') and str(value).endswith('"')):
+                    return f'-"{value}"'
+                else:
+                    return f'-{value}'
+        
+        else:
+            # Unknown operator, return as string
+            return str(op_dict)
     
     def _infer_more_structures(self, filters: List[Dict]) -> List[Dict]:
         """
