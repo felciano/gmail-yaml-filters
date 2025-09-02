@@ -21,6 +21,24 @@ class OperatorInference:
             verbose: Whether to print detailed inference information
         """
         self.verbose = verbose
+    
+    def _strip_quotes(self, value: str) -> str:
+        """
+        Strip surrounding quotes from a string if present.
+        Gmail uses quotes for exact phrase matching, but we don't need them in YAML.
+        
+        Args:
+            value: String that may have surrounding quotes
+            
+        Returns:
+            String with quotes removed if they were surrounding the entire value
+        """
+        if len(value) >= 2:
+            # Check for matching quotes at start and end
+            if (value.startswith('"') and value.endswith('"')) or \
+               (value.startswith("'") and value.endswith("'")):
+                return value[1:-1]
+        return value
         
     def infer_operators(self, filter_dict: Dict) -> Dict:
         """
@@ -104,8 +122,8 @@ class OperatorInference:
         if and_result:
             return and_result
         
-        # No patterns detected, return as-is
-        return value
+        # No patterns detected, strip quotes and return
+        return self._strip_quotes(value)
     
     def _detect_or_pattern(self, value: str) -> Optional[Dict]:
         """
@@ -142,6 +160,9 @@ class OperatorInference:
                 parts = terms[-1].split(' OR ', 1)
                 terms[-1] = parts[0].strip()
                 terms.append(parts[1].strip())
+            
+            # Strip quotes from each term
+            terms = [self._strip_quotes(t) for t in terms]
             
             # Process each term recursively
             processed_terms = [self._process_search_string(t, '') for t in terms]
@@ -192,6 +213,9 @@ class OperatorInference:
                 terms[-1] = parts[0].strip()
                 terms.append(parts[1].strip())
             
+            # Strip quotes from each term
+            terms = [self._strip_quotes(t) for t in terms]
+            
             # Process each term recursively
             processed_terms = [self._process_search_string(t, '') for t in terms]
             return {'all': processed_terms}
@@ -223,9 +247,15 @@ class OperatorInference:
             'not' operator structure or None
         """
         # Pattern: Leading minus
-        # Examples: "-alice", "-newsletter", "-{spam promotions}"
+        # Examples: "-alice", "-newsletter", "-{spam promotions}", '-"exact phrase"'
         if value.startswith('-') and len(value) > 1:
             negated_term = value[1:].strip()
+            
+            # Strip quotes from the negated term if it's not going to be further processed
+            # Check if it's a simple negation (no operators)
+            if not (' OR ' in negated_term or ' AND ' in negated_term or 
+                    negated_term.startswith('{') or negated_term.startswith('(')):
+                negated_term = self._strip_quotes(negated_term)
             
             # Process the negated term for nested operators
             processed = self._process_search_string(negated_term, '')
