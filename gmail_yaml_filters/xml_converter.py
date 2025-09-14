@@ -15,6 +15,15 @@ from lxml import etree
 from .inference_safety import InferenceSafety
 from .operator_inference import OperatorInference
 
+# Import xmldiff validation if available
+try:
+    from .xml_validator import validate_round_trip_with_xmldiff, XMLDIFF_AVAILABLE
+except ImportError:
+    XMLDIFF_AVAILABLE = False
+    validate_round_trip_with_xmldiff = None
+
+import hashlib
+
 
 class GmailFilterConverter:
     """Converts between Gmail XML filter exports and gmail-yaml-filters YAML format."""
@@ -119,6 +128,85 @@ class GmailFilterConverter:
             'round_trip_valid': None
         }
     
+    def _pre_check_expressions(self, root, ns: Dict) -> List[Dict]:
+        """
+        Pre-check all filters for malformed expressions.
+        Returns a list of issues found.
+        
+        Args:
+            root: XML root element
+            ns: Namespace dictionary
+            
+        Returns:
+            List of error dictionaries with filter info
+        """
+        issues = []
+        entries = root.xpath('//atom:entry', namespaces=ns)
+        
+        for i, entry in enumerate(entries):
+            # Get filter ID if available for better reporting
+            filter_id = None
+            id_element = entry.find('{http://www.w3.org/2005/Atom}id')
+            if id_element is not None and id_element.text:
+                if 'filter:' in id_element.text:
+                    filter_id = id_element.text.split('filter:')[-1]
+            
+            # Check all properties
+            properties = entry.xpath('.//apps:property', namespaces=ns)
+            for prop in properties:
+                name = prop.get('name')
+                value = prop.get('value', '')
+                
+                if not name or not value:
+                    continue
+                
+                # Check if this is a searchable field that might have expressions
+                yaml_key = self.XML_TO_YAML_MAP.get(name)
+                if yaml_key in ['from', 'to', 'subject', 'has', 'does_not_have']:
+                    # Check for boolean operators or parentheses/brackets
+                    if any(op in value for op in [' OR ', ' AND ', '(', ')', '[', ']', '{', '}']):
+                        try:
+                            self._validate_expression_balance(value, f"{yaml_key} (XML property: {name})")
+                        except ValueError as e:
+                            # Extract a sample of the filter for context
+                            filter_sample = self._get_filter_sample(entry, ns)
+                            issues.append({
+                                'filter_index': i + 1,
+                                'filter_id': filter_id,
+                                'field': yaml_key,
+                                'value': value,
+                                'error': str(e).split('\n')[0],  # First line of error
+                                'sample': filter_sample
+                            })
+        
+        return issues
+    
+    def _get_filter_sample(self, entry, ns: Dict) -> str:
+        """
+        Get a brief sample of the filter for error reporting.
+        
+        Args:
+            entry: XML entry element
+            ns: Namespace dictionary
+            
+        Returns:
+            Brief description of the filter
+        """
+        sample_parts = []
+        properties = entry.xpath('.//apps:property', namespaces=ns)
+        
+        # Get a few key properties for context
+        for prop in properties[:3]:  # Just first 3 properties
+            name = prop.get('name')
+            value = prop.get('value', '')
+            if name and value:
+                yaml_key = self.XML_TO_YAML_MAP.get(name, name)
+                if len(value) > 50:
+                    value = value[:50] + '...'
+                sample_parts.append(f"{yaml_key}={value}")
+        
+        return ', '.join(sample_parts) if sample_parts else 'No properties found'
+    
     def xml_to_yaml(self, xml_input: Union[str, Path], yaml_output: Optional[Union[str, Path]] = None) -> List[Dict]:
         """
         Convert Gmail XML to YAML dict structure.
@@ -146,6 +234,13 @@ class GmailFilterConverter:
         ns = {'atom': 'http://www.w3.org/2005/Atom',
               'apps': 'http://schemas.google.com/apps/2006'}
         
+        # Pre-check all expressions for balance issues
+        issues = self._pre_check_expressions(root, ns)
+        if issues:
+            # Format comprehensive error message
+            error_msg = self._format_expression_issues(issues)
+            raise ValueError(error_msg)
+        
         filters = []
         entries = root.xpath('//atom:entry', namespaces=ns)
         self.stats['total_filters'] = len(entries)
@@ -169,6 +264,97 @@ class GmailFilterConverter:
             self._write_yaml(filters, yaml_output)
         
         return filters
+    
+    def _format_expression_issues(self, issues: List[Dict]) -> str:
+        """
+        Format a comprehensive error message for all expression issues found.
+        
+        Args:
+            issues: List of issue dictionaries
+            
+        Returns:
+            Formatted error message
+        """
+        lines = [
+            "Found malformed expressions in Gmail filters:",
+            "=" * 60,
+            ""
+        ]
+        
+        for issue in issues:
+            filter_desc = f"Filter #{issue['filter_index']}"
+            if issue['filter_id']:
+                filter_desc += f" (ID: {issue['filter_id']})"
+            
+            lines.append(filter_desc)
+            lines.append(f"  Field: {issue['field']}")
+            lines.append(f"  Value: {issue['value'][:100]}{'...' if len(issue['value']) > 100 else ''}")
+            lines.append(f"  Problem: {issue['error']}")
+            lines.append(f"  Filter sample: {issue['sample']}")
+            lines.append("")
+        
+        lines.append("=" * 60)
+        lines.append(f"Total filters with issues: {len(issues)}")
+        lines.append("")
+        lines.append("Please fix these filters in Gmail before converting.")
+        lines.append("The expressions have unbalanced or mismatched parentheses/brackets.")
+        
+        return '\n'.join(lines)
+    
+    def _pre_check_yaml_expressions(self, filters: List[Dict]) -> List[Dict]:
+        """
+        Pre-check all YAML filters for malformed expressions.
+        Returns a list of issues found.
+        
+        Args:
+            filters: List of filter dictionaries
+            
+        Returns:
+            List of error dictionaries with filter info
+        """
+        issues = []
+        
+        def check_value(value: Any, field: str, filter_index: int, filter_dict: Dict):
+            """Recursively check values including nested structures."""
+            if isinstance(value, str):
+                if any(op in value for op in [' OR ', ' AND ', '(', ')', '[', ']', '{', '}']):
+                    try:
+                        self._validate_expression_balance(value, field)
+                    except ValueError as e:
+                        # Get filter sample
+                        sample_parts = []
+                        for k, v in list(filter_dict.items())[:3]:
+                            if k != '_gmail_raw':
+                                v_str = str(v)[:50]
+                                if len(str(v)) > 50:
+                                    v_str += '...'
+                                sample_parts.append(f"{k}={v_str}")
+                        
+                        issues.append({
+                            'filter_index': filter_index + 1,
+                            'filter_id': filter_dict.get('_gmail_raw', {}).get('id'),
+                            'field': field,
+                            'value': value,
+                            'error': str(e).split('\n')[0],
+                            'sample': ', '.join(sample_parts)
+                        })
+            elif isinstance(value, list):
+                for item in value:
+                    check_value(item, field, filter_index, filter_dict)
+            elif isinstance(value, dict):
+                # Handle operator dictionaries
+                for op_key, op_value in value.items():
+                    if op_key in ['any', 'all', 'not']:
+                        check_value(op_value, field, filter_index, filter_dict)
+        
+        # Check each filter
+        for i, filter_dict in enumerate(filters):
+            # Check searchable fields
+            for field in ['from', 'to', 'subject', 'has', 'does_not_have']:
+                if field in filter_dict:
+                    check_value(filter_dict[field], field, i, filter_dict)
+        
+        return issues
     
     def yaml_to_xml(self, yaml_input: Union[List, Dict, str, Path], xml_output: Optional[Union[str, Path]] = None) -> str:
         """
@@ -199,6 +385,13 @@ class GmailFilterConverter:
         else:
             filters = [data]
         
+        # Pre-check all expressions for balance issues
+        issues = self._pre_check_yaml_expressions(filters)
+        if issues:
+            # Format comprehensive error message
+            error_msg = self._format_expression_issues(issues)
+            raise ValueError(error_msg)
+        
         # Create XML structure
         xml_str = self._create_gmail_xml(filters)
         
@@ -209,12 +402,138 @@ class GmailFilterConverter:
         
         return xml_str
     
-    def validate_round_trip(self, xml_input: Union[str, Path]) -> bool:
+    def _canonicalize_xml(self, xml_content: bytes, remove_feed_metadata: bool = True) -> bytes:
+        """
+        Canonicalize XML for order-insensitive comparison.
+        
+        Args:
+            xml_content: XML content as bytes
+            remove_feed_metadata: If True, remove feed-level id, updated, author
+            
+        Returns:
+            Canonicalized XML as bytes
+        """
+        # Parse with blank text removal
+        parser = etree.XMLParser(remove_blank_text=True)
+        tree = etree.fromstring(xml_content, parser)
+        
+        # Optionally remove feed-level metadata that's not preserved in roundtrip
+        if remove_feed_metadata:
+            ns = {'atom': 'http://www.w3.org/2005/Atom'}
+            # Remove feed-level id, updated, author elements
+            for elem_name in ['id', 'updated', 'author']:
+                for elem in tree.xpath(f'/atom:feed/atom:{elem_name}', namespaces=ns):
+                    elem.getparent().remove(elem)
+        
+        # Normalize boolean expressions by adding outer parentheses where missing
+        self._normalize_boolean_expressions(tree)
+        
+        # Sort all children recursively
+        self._sort_xml_children(tree)
+        
+        # Apply C14N canonicalization
+        canonical = etree.tostring(tree, method="c14n", with_comments=False, exclusive=False)
+        
+        return canonical
+    
+    def _normalize_boolean_expressions(self, tree):
+        """
+        Normalize boolean expressions by adding outer parentheses where missing.
+        
+        This ensures that 'A OR B' and '(A OR B)' are treated as equivalent,
+        since adding outer parentheses doesn't change the meaning in Gmail's search syntax.
+        
+        Args:
+            tree: XML tree to normalize in-place
+        """
+        ns = {'apps': 'http://schemas.google.com/apps/2006'}
+        
+        # Find all property elements
+        for prop in tree.xpath('//apps:property', namespaces=ns):
+            value = prop.get('value', '')
+            
+            # Skip empty values
+            if not value:
+                continue
+                
+            # Check if value contains OR or AND operators (case-sensitive as Gmail uses)
+            if ' OR ' in value or ' AND ' in value:
+                # Skip if already wrapped in outer parentheses
+                if value.startswith('(') and value.endswith(')'):
+                    # Verify these are balanced outer parentheses
+                    # Simple check: remove outer parens and count remaining
+                    inner = value[1:-1]
+                    open_count = inner.count('(')
+                    close_count = inner.count(')')
+                    if open_count == close_count:
+                        # Already has outer parentheses, skip
+                        continue
+                
+                # Add outer parentheses
+                prop.set('value', f'({value})')
+    
+    def _sort_xml_children(self, elem):
+        """Recursively sort all children of an XML element."""
+        # First recurse into children
+        for child in list(elem):
+            if isinstance(child.tag, str):  # Skip comments, PIs
+                self._sort_xml_children(child)
+        
+        # Get all element children (skip comments/PIs/text)
+        kids = [c for c in elem if isinstance(c.tag, str)]
+        
+        # Sort them
+        kids_sorted = sorted(kids, key=self._gmail_sort_key)
+        
+        # If order changed, reattach in sorted order
+        if kids != kids_sorted:
+            for k in kids:
+                elem.remove(k)
+            for k in kids_sorted:
+                elem.append(k)
+    
+    def _gmail_sort_key(self, elem):
+        """
+        Build a deterministic sort key for Gmail filter elements.
+        
+        For Gmail filters, we prioritize:
+        1. Tag name (localname without namespace)
+        2. For <property> elements: the 'name' attribute value
+        3. For <entry> elements: the filter ID if present
+        4. Other attributes alphabetically
+        5. Text content
+        """
+        tag = etree.QName(elem).localname
+        
+        # Special handling for Gmail property elements
+        if tag == 'property':
+            # Sort properties by their 'name' attribute
+            name_attr = elem.get('name', '')
+            return (tag, name_attr, elem.get('value', ''))
+        
+        # Special handling for entry elements - sort by ID
+        if tag == 'entry':
+            # Find the ID child element
+            id_text = ''
+            for child in elem:
+                if etree.QName(child).localname == 'id' and child.text:
+                    id_text = child.text.split(':')[-1]  # Extract just the filter ID
+                    break
+            return (tag, id_text)
+        
+        # For other elements, use tag + sorted attributes + text
+        attrs = tuple(sorted((k, v) for k, v in elem.attrib.items()))
+        text = (elem.text or "").strip()
+        return (tag, attrs, text)
+    
+    def validate_round_trip(self, xml_input: Union[str, Path], use_xmldiff: bool = False, use_canonical: bool = True) -> bool:
         """
         Verify that XML → YAML → XML preserves all data.
         
         Args:
             xml_input: Path to XML file or XML string
+            use_xmldiff: If True and available, use xmldiff for comparison (deprecated)
+            use_canonical: If True, use canonical XML comparison (recommended)
             
         Returns:
             True if round-trip preserves all data (or successfully converts when merging)
@@ -222,23 +541,75 @@ class GmailFilterConverter:
         # Convert XML to YAML
         yaml_data = self.xml_to_yaml(xml_input)
         
-        # If merging is enabled, we can't do a true round-trip validation
-        # Instead, just verify the conversion works both ways
+        # Merging MUST be lossless - we expect perfect round-trip even with merging
         if self.merge_filters or self.infer_more:
+            if self.verbose:
+                print("Validating lossless round-trip with merging/inference...", file=sys.stderr)
+            
             try:
-                # Convert back to XML - this tests that the merged structure is valid
+                # Convert back to XML
                 restored_xml = self.yaml_to_xml(yaml_data)
                 
-                # Parse to ensure it's valid XML
+                # Parse to count filters
                 restored_filters = self._parse_xml_filters(restored_xml)
+                original_filters = self._parse_xml_filters(xml_input)
                 
                 if self.verbose:
-                    original_filters = self._parse_xml_filters(xml_input)
-                    print(f"✅ Conversion successful: {len(original_filters)} → {len(yaml_data)} → {len(restored_filters)} filters", file=sys.stderr)
+                    print(f"  Filter count: {len(original_filters)} → {len(yaml_data)} YAML entries → {len(restored_filters)} filters", file=sys.stderr)
                     if len(yaml_data) < len(original_filters):
-                        print(f"   Merged {len(original_filters) - len(yaml_data)} filters", file=sys.stderr)
+                        print(f"  Merged {len(original_filters) - len(yaml_data)} filters into hierarchies", file=sys.stderr)
                 
-                return True
+                # Check filter count first
+                if len(original_filters) != len(restored_filters):
+                    if self.verbose:
+                        print(f"❌ Filter count mismatch: {len(original_filters)} original vs {len(restored_filters)} restored", file=sys.stderr)
+                    return False
+                
+                # Perform canonical comparison to ensure PERFECT round-trip
+                if use_canonical:
+                    if self.verbose:
+                        print("  Verifying perfect round-trip with canonical comparison...", file=sys.stderr)
+                    
+                    # Read original XML
+                    if isinstance(xml_input, (str, Path)) and Path(xml_input).exists():
+                        with open(xml_input, 'rb') as f:
+                            original_xml_bytes = f.read()
+                    else:
+                        original_xml_bytes = xml_input.encode('utf-8') if isinstance(xml_input, str) else xml_input
+                    
+                    # Convert restored XML to bytes
+                    restored_xml_bytes = restored_xml.encode('utf-8') if isinstance(restored_xml, str) else restored_xml
+                    
+                    # Canonicalize both
+                    original_canonical = self._canonicalize_xml(original_xml_bytes, remove_feed_metadata=True)
+                    restored_canonical = self._canonicalize_xml(restored_xml_bytes, remove_feed_metadata=True)
+                    
+                    # Compare - MUST be identical for lossless round-trip
+                    is_identical = original_canonical == restored_canonical
+                    
+                    if self.verbose:
+                        if is_identical:
+                            print(f"  ✅ Perfect round-trip achieved (canonical match)", file=sys.stderr)
+                            original_hash = hashlib.sha256(original_canonical).hexdigest()
+                            print(f"     SHA256: {original_hash}", file=sys.stderr)
+                        else:
+                            print(f"  ❌ Round-trip NOT lossless - canonical comparison failed", file=sys.stderr)
+                            original_hash = hashlib.sha256(original_canonical).hexdigest()
+                            restored_hash = hashlib.sha256(restored_canonical).hexdigest()
+                            print(f"     Original SHA256: {original_hash}", file=sys.stderr)
+                            print(f"     Restored SHA256: {restored_hash}", file=sys.stderr)
+                    
+                    return is_identical  # CRITICAL: Return the actual comparison result
+                else:
+                    # Fall back to dictionary comparison
+                    is_valid = self._filters_are_equivalent(original_filters, restored_filters)
+                    if self.verbose:
+                        if is_valid:
+                            print(f"  ✅ All filters preserved (dictionary comparison)", file=sys.stderr)
+                        else:
+                            print(f"  ❌ Filters differ", file=sys.stderr)
+                    return is_valid
+                    
             except Exception as e:
                 if self.verbose:
                     print(f"❌ Conversion failed: {e}", file=sys.stderr)
@@ -248,6 +619,73 @@ class GmailFilterConverter:
         # Convert back to XML
         restored_xml = self.yaml_to_xml(yaml_data)
         
+        # Try canonical comparison first (recommended)
+        if use_canonical:
+            if self.verbose:
+                print("Using canonical XML comparison (order-insensitive)...", file=sys.stderr)
+            
+            # Read original XML
+            if isinstance(xml_input, (str, Path)) and Path(xml_input).exists():
+                with open(xml_input, 'rb') as f:
+                    original_xml_bytes = f.read()
+            else:
+                original_xml_bytes = xml_input.encode('utf-8') if isinstance(xml_input, str) else xml_input
+            
+            # Convert restored XML to bytes
+            restored_xml_bytes = restored_xml.encode('utf-8') if isinstance(restored_xml, str) else restored_xml
+            
+            # Canonicalize both
+            original_canonical = self._canonicalize_xml(original_xml_bytes, remove_feed_metadata=True)
+            restored_canonical = self._canonicalize_xml(restored_xml_bytes, remove_feed_metadata=True)
+            
+            # Compare
+            is_valid = original_canonical == restored_canonical
+            
+            if self.verbose:
+                original_hash = hashlib.sha256(original_canonical).hexdigest()
+                restored_hash = hashlib.sha256(restored_canonical).hexdigest()
+                
+                if is_valid:
+                    print(f"  ✅ XMLs are identical after canonicalization", file=sys.stderr)
+                    print(f"     SHA256: {original_hash}", file=sys.stderr)
+                else:
+                    print(f"  ❌ XMLs differ after canonicalization", file=sys.stderr)
+                    print(f"     Original SHA256: {original_hash}", file=sys.stderr)
+                    print(f"     Restored SHA256: {restored_hash}", file=sys.stderr)
+                    
+                    # Show first difference
+                    for i, (b1, b2) in enumerate(zip(original_canonical, restored_canonical)):
+                        if b1 != b2:
+                            print(f"     First difference at byte {i}", file=sys.stderr)
+                            break
+            
+            self.stats['round_trip_valid'] = is_valid
+            return is_valid
+        
+        # Try xmldiff validation if requested (deprecated)
+        if use_xmldiff and XMLDIFF_AVAILABLE and validate_round_trip_with_xmldiff:
+            if self.verbose:
+                print("Using xmldiff for order-insensitive validation...", file=sys.stderr)
+            
+            # Convert restored_xml to bytes if it's a string
+            if isinstance(restored_xml, str):
+                restored_xml_bytes = restored_xml.encode('utf-8')
+            else:
+                restored_xml_bytes = restored_xml
+            
+            # Use xmldiff for comparison (ignores order differences)
+            xmldiff_result = validate_round_trip_with_xmldiff(
+                Path(xml_input) if isinstance(xml_input, str) else xml_input,
+                restored_xml_bytes,
+                ignore_order=True,
+                verbose=self.verbose
+            )
+            
+            if xmldiff_result is not None:
+                self.stats['round_trip_valid'] = xmldiff_result
+                return xmldiff_result
+        
+        # Fall back to original dictionary comparison
         # Parse both XML documents
         original_filters = self._parse_xml_filters(xml_input)
         restored_filters = self._parse_xml_filters(restored_xml)
@@ -265,10 +703,75 @@ class GmailFilterConverter:
         
         return is_valid
     
+    def _validate_expression_balance(self, value: str, field: str) -> None:
+        """
+        Validate that parentheses and brackets are properly balanced.
+        Raises ValueError if unbalanced.
+        
+        Args:
+            value: Expression to validate
+            field: Field name for error reporting
+        """
+        stack = []
+        pairs = {'(': ')', '[': ']', '{': '}'}
+        
+        for i, char in enumerate(value):
+            if char in pairs:
+                stack.append((char, i))
+            elif char in pairs.values():
+                if not stack:
+                    raise ValueError(
+                        f"Unbalanced parentheses/brackets in expression: '{value}'\n"
+                        f"Field: {field}\n"
+                        f"Character '{char}' at position {i} has no matching opening\n"
+                        f"This is likely a malformed Gmail filter expression.\n"
+                        f"Please fix the filter in Gmail before converting"
+                    )
+                last_open, pos = stack.pop()
+                if pairs[last_open] != char:
+                    raise ValueError(
+                        f"Mismatched parentheses/brackets in expression: '{value}'\n"
+                        f"Field: {field}\n"
+                        f"Opening '{last_open}' at position {pos} doesn't match closing '{char}' at position {i}\n"
+                        f"This is likely a malformed Gmail filter expression.\n"
+                        f"Please fix the filter in Gmail before converting"
+                    )
+        
+        if stack:
+            unmatched = ', '.join(f"'{char}' at position {pos}" for char, pos in stack)
+            raise ValueError(
+                f"Unbalanced parentheses/brackets in expression: '{value}'\n"
+                f"Field: {field}\n"
+                f"Unclosed opening characters: {unmatched}\n"
+                f"This is likely a malformed Gmail filter expression.\n"
+                f"Please fix the filter in Gmail before converting"
+            )
+    
     def _convert_xml_entry(self, entry, ns: Dict, filter_index: int = 0) -> Optional[Dict]:
         """Convert a single XML entry to a filter dictionary."""
         filter_dict = {}
         gmail_raw = {}
+        
+        # Preserve Gmail metadata (id and updated timestamps)
+        id_element = entry.find('{http://www.w3.org/2005/Atom}id')
+        if id_element is not None and id_element.text:
+            # Extract just the filter ID number from the full tag URI
+            # Format: tag:mail.google.com,2008:filter:1746353375264
+            id_text = id_element.text
+            if 'filter:' in id_text:
+                filter_id = id_text.split('filter:')[-1]
+                gmail_raw['id'] = filter_id
+            else:
+                gmail_raw['id'] = id_text
+        
+        updated_element = entry.find('{http://www.w3.org/2005/Atom}updated')
+        if updated_element is not None and updated_element.text:
+            gmail_raw['updated'] = updated_element.text
+        
+        # Preserve title element
+        title_element = entry.find('{http://www.w3.org/2005/Atom}title')
+        if title_element is not None and title_element.text:
+            gmail_raw['title'] = title_element.text
         
         properties = entry.xpath('.//apps:property', namespaces=ns)
         
@@ -307,6 +810,9 @@ class GmailFilterConverter:
             # Map to YAML property
             yaml_key = self.XML_TO_YAML_MAP.get(name)
             if yaml_key:
+                # Note: Expression validation is now done in pre-check phase
+                # This ensures all errors are reported at once
+                
                 # Convert boolean values
                 if name in self.BOOLEAN_PROPERTIES:
                     value = value.lower() == 'true'
@@ -358,12 +864,26 @@ class GmailFilterConverter:
                     # Remove parent's action properties, keep only conditions
                     for key in ['label', 'archive', 'delete', 'forward', 'important', 
                                'not_important', 'not_spam', 'read', 'spam', 'star', 
-                               'trash', 'unread']:
+                               'trash', 'unread', '_gmail_raw']:  # Also remove _gmail_raw
                         if key in merged_child:
                             del merged_child[key]
                     
-                    # Add child's properties (both conditions and actions)
-                    merged_child.update(child)
+                    # Handle _gmail_raw specially - merge parent and child
+                    if '_gmail_raw' in parent and '_gmail_raw' in child:
+                        # Merge parent and child _gmail_raw, child takes precedence
+                        merged_raw = parent['_gmail_raw'].copy()
+                        merged_raw.update(child['_gmail_raw'])
+                        child_with_merged_raw = child.copy()
+                        child_with_merged_raw['_gmail_raw'] = merged_raw
+                        merged_child.update(child_with_merged_raw)
+                    elif '_gmail_raw' in parent and '_gmail_raw' not in child:
+                        # Child has no _gmail_raw, inherit parent's
+                        child_with_parent_raw = child.copy()
+                        child_with_parent_raw['_gmail_raw'] = parent['_gmail_raw'].copy()
+                        merged_child.update(child_with_parent_raw)
+                    else:
+                        # Add child's properties as-is
+                        merged_child.update(child)
                     
                     # Expand labels if needed
                     self._expand_filter_labels(merged_child, flattened)
@@ -413,9 +933,29 @@ class GmailFilterConverter:
             category = etree.SubElement(entry, 'category')
             category.set('term', 'filter')
             
-            # Add title
+            # Add title - use preserved value if available, otherwise default
             entry_title = etree.SubElement(entry, 'title')
-            entry_title.text = 'Mail Filter'
+            if '_gmail_raw' in filter_dict and 'title' in filter_dict['_gmail_raw']:
+                entry_title.text = filter_dict['_gmail_raw']['title']
+            else:
+                entry_title.text = 'Mail Filter'
+            
+            # Add Gmail metadata if present
+            if '_gmail_raw' in filter_dict:
+                # Add id if present
+                if 'id' in filter_dict['_gmail_raw']:
+                    id_element = etree.SubElement(entry, 'id')
+                    filter_id = filter_dict['_gmail_raw']['id']
+                    # Reconstruct full Gmail filter ID if it's just the number
+                    if filter_id.isdigit() or not filter_id.startswith('tag:'):
+                        id_element.text = f'tag:mail.google.com,2008:filter:{filter_id}'
+                    else:
+                        id_element.text = filter_id
+                
+                # Add updated timestamp if present
+                if 'updated' in filter_dict['_gmail_raw']:
+                    updated_element = etree.SubElement(entry, 'updated')
+                    updated_element.text = filter_dict['_gmail_raw']['updated']
             
             # Add content (empty)
             content = etree.SubElement(entry, 'content')
@@ -430,10 +970,11 @@ class GmailFilterConverter:
                     # Labels should already be single values after flattening
                     self._add_property(entry, xml_key, value, ns_map)
             
-            # Add preserved Gmail properties
+            # Add preserved Gmail properties (except id, updated, and title which are handled as elements)
             if '_gmail_raw' in filter_dict:
                 for name, value in filter_dict['_gmail_raw'].items():
-                    self._add_property(entry, name, value, ns_map)
+                    if name not in ['id', 'updated', 'title']:  # Skip metadata fields that are elements, not properties
+                        self._add_property(entry, name, value, ns_map)
         
         # Convert to string
         xml_bytes = etree.tostring(
@@ -458,6 +999,9 @@ class GmailFilterConverter:
             # Handle operator dictionaries - convert back to Gmail search syntax
             value = self._operator_dict_to_string(value)
         
+        # Note: Expression validation is now done in pre-check phase
+        # This ensures all errors are reported at once
+        
         prop.set('value', str(value))
     
     def _operator_dict_to_string(self, op_dict: Dict) -> str:
@@ -476,7 +1020,10 @@ class GmailFilterConverter:
                 # Quote terms if they contain spaces
                 quoted_terms = []
                 for term in terms:
-                    if ' ' in str(term) and not (str(term).startswith('"') and str(term).endswith('"')):
+                    if isinstance(term, dict):
+                        # Nested operator - recurse
+                        quoted_terms.append(self._operator_dict_to_string(term))
+                    elif ' ' in str(term) and not (str(term).startswith('"') and str(term).endswith('"')):
                         quoted_terms.append(f'"{term}"')
                     else:
                         quoted_terms.append(str(term))
@@ -735,6 +1282,61 @@ class GmailFilterConverter:
             self.safety_analyzer.remember_decision(pattern_key, 'no')
             return False
     
+    def _format_filter_summary(self, filter_dict: Dict, max_value_len: int = 50) -> str:
+        """
+        Format a concise summary of a filter for logging.
+        
+        Args:
+            filter_dict: Filter dictionary
+            max_value_len: Maximum length for each value display
+            
+        Returns:
+            Formatted filter summary string
+        """
+        summary_parts = []
+        
+        # Priority order for fields to show
+        priority_fields = ['from', 'to', 'subject', 'has', 'label', 'archive', 'delete']
+        
+        # First add priority fields if present
+        for field in priority_fields:
+            if field in filter_dict:
+                value = filter_dict[field]
+                if isinstance(value, str) and len(value) > max_value_len:
+                    value = value[:max_value_len] + '...'
+                elif isinstance(value, list):
+                    value = f"[{', '.join(str(v)[:20] for v in value[:2])}{'...' if len(value) > 2 else ''}]"
+                elif isinstance(value, dict):
+                    # Handle operator dicts
+                    if 'any' in value:
+                        value = f"any({len(value['any'])} items)"
+                    elif 'all' in value:
+                        value = f"all({len(value['all'])} items)"
+                    elif 'not' in value:
+                        value = f"not(...)"
+                summary_parts.append(f"{field}={value}")
+                
+                # Stop after we have 3-4 parts for brevity
+                if len(summary_parts) >= 4:
+                    break
+        
+        # If we don't have enough, add any other fields
+        if len(summary_parts) < 3:
+            for field, value in filter_dict.items():
+                if field not in priority_fields and field != '_gmail_raw':
+                    if isinstance(value, str) and len(value) > max_value_len:
+                        value = value[:max_value_len] + '...'
+                    summary_parts.append(f"{field}={value}")
+                    if len(summary_parts) >= 3:
+                        break
+        
+        # Add filter ID if available
+        if '_gmail_raw' in filter_dict and 'id' in filter_dict['_gmail_raw']:
+            filter_id = filter_dict['_gmail_raw']['id']
+            return f"Filter ID {filter_id}: {', '.join(summary_parts)}"
+        
+        return ', '.join(summary_parts) if summary_parts else 'Empty filter'
+    
     def _get_filter_conditions(self, filter_dict: Dict) -> Dict:
         """
         Extract only the condition fields from a filter (not actions).
@@ -784,8 +1386,27 @@ class GmailFilterConverter:
             if self.infer_strategy == 'conservative':
                 # Conservative: Skip if any safety warnings
                 if not safety_analysis['safe'] or safety_analysis['warnings']:
+                    # Always show basic info about skipped filter, even in non-verbose mode
+                    parent_summary = self._format_filter_summary(parent)
+                    child_summary = self._format_filter_summary(child)
+                    
+                    # Extract the primary warning for display
+                    primary_reason = "Safety concern detected"
+                    if safety_analysis['warnings']:
+                        # Clean up the first warning for display
+                        primary_reason = safety_analysis['warnings'][0].replace('⛔', '').replace('⚠️', '').replace('ℹ️', '').strip()
+                    
                     if self.verbose:
-                        print(f"  Skipping merge due to safety concerns: {safety_analysis['warnings']}", file=sys.stderr)
+                        print(f"  Skipping filter merge due to safety concerns:", file=sys.stderr)
+                        print(f"    Parent: {parent_summary}", file=sys.stderr)
+                        print(f"    Child:  {child_summary}", file=sys.stderr)
+                        if safety_analysis['warnings']:
+                            print(f"    Reason: {'; '.join(safety_analysis['warnings'])}", file=sys.stderr)
+                    else:
+                        # Non-verbose: Show concise but informative message
+                        print(f"  ⚠️  Skipping filter merge: {primary_reason}", file=sys.stderr)
+                        print(f"      Child filter: {child_summary}", file=sys.stderr)
+                    
                     self.stats['hierarchies_skipped_safety'] += 1
                     return False
                 
@@ -802,8 +1423,32 @@ class GmailFilterConverter:
             elif self.infer_strategy == 'aggressive':
                 # Aggressive: Only skip critical safety issues
                 if safety_analysis['severity'] == 'critical':
+                    # Always show basic info about skipped filter, even in non-verbose mode
+                    parent_summary = self._format_filter_summary(parent)
+                    child_summary = self._format_filter_summary(child)
+                    
+                    # Extract the most critical warning for display
+                    critical_reason = "Safety conflict detected"
+                    if safety_analysis['warnings']:
+                        # Find the most critical warning (those with ⛔ symbol)
+                        critical_warnings = [w for w in safety_analysis['warnings'] if '⛔' in w]
+                        if critical_warnings:
+                            # Clean up the warning for display
+                            critical_reason = critical_warnings[0].replace('⛔', '').strip()
+                        elif safety_analysis['warnings']:
+                            critical_reason = safety_analysis['warnings'][0].replace('⚠️', '').strip()
+                    
                     if self.verbose:
-                        print(f"  Skipping merge due to critical safety issue: {safety_analysis['warnings']}", file=sys.stderr)
+                        print(f"  Skipping filter merge due to critical safety issue:", file=sys.stderr)
+                        print(f"    Parent: {parent_summary}", file=sys.stderr)
+                        print(f"    Child:  {child_summary}", file=sys.stderr)
+                        if safety_analysis['warnings']:
+                            print(f"    Reason: {'; '.join(safety_analysis['warnings'])}", file=sys.stderr)
+                    else:
+                        # Non-verbose: Show concise but informative message
+                        print(f"  ⚠️  Skipping filter merge: {critical_reason}", file=sys.stderr)
+                        print(f"      Child filter: {child_summary}", file=sys.stderr)
+                    
                     self.stats['hierarchies_skipped_safety'] += 1
                     return False
         
