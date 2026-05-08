@@ -17,7 +17,9 @@
       "Bash(cd:*)",
       "Bash(poetry run:*)",
       "Bash(git commit:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebFetch(domain:xmldiff.readthedocs.io)",
+      "Bash(xmldiff:*)"
     ],
     "deny": [],
     "ask": []
