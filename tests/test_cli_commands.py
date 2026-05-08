@@ -7,8 +7,8 @@ import sys
 import os
 import tempfile
 from pathlib import Path
-from unittest.mock import patch, MagicMock, mock_open, call
 from io import StringIO
+from unittest.mock import patch, MagicMock, mock_open, call
 import argparse
 
 from gmail_yaml_filters.main import (
@@ -225,9 +225,13 @@ class TestCLICommands:
             args.verbose = False
             
             with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
-                cmd_validate(args)
-                output = mock_stdout.getvalue()
-            assert 'valid' in output.lower()
+                with patch('sys.stderr', new_callable=StringIO) as mock_stderr:
+                    with pytest.raises(SystemExit) as exc_info:
+                        cmd_validate(args)
+                    # Should exit with 0 for success
+                    assert exc_info.value.code == 0
+                    stderr_output = mock_stderr.getvalue()
+                    assert 'SUCCESS' in stderr_output
         finally:
             os.unlink(xml_file)
     
@@ -316,7 +320,7 @@ class TestCLICommands:
             args.dry_run = False
             args.client_secret = None
             args.credential_store = None
-            
+
             cmd_prune(args)
             
             # Verify prune was called

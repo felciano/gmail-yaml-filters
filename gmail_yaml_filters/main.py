@@ -150,14 +150,28 @@ Examples:
         help='Remove meaningless Gmail defaults from output'
     )
     convert_parser.add_argument(
+        '--no-preserve-raw',
+        dest='preserve_raw',
+        action='store_false',
+        default=True,
+        help='Do not preserve raw Gmail properties including metadata'
+    )
+    convert_parser.add_argument(
         '--filter-merging',
         choices=['none', 'conservative', 'aggressive', 'interactive'],
         default='none',
         help='Filter merging and inference level (XML to YAML only). '
              'none: No merging or inference. '
-             'conservative: Merge identical filters, infer safe hierarchies and operators. '
+             'conservative: Merge identical filters, infer safe hierarchies. '
              'aggressive: More aggressive merging with subset detection. '
              'interactive: Show safety analysis and prompt for each merge.'
+    )
+    convert_parser.add_argument(
+        '--infer-operators',
+        action='store_true',
+        help='Infer YAML operators (any, all, not) from Gmail OR/AND/NOT patterns. '
+             'Creates more readable YAML but requires well-formed expressions with balanced parentheses. '
+             'Will fail if malformed expressions are encountered.'
     )
     convert_parser.add_argument(
         '-v', '--verbose',
@@ -196,14 +210,35 @@ Examples:
         default='none',
         help='Filter merging and inference level for validation. '
              'none: No merging or inference. '
-             'conservative: Merge identical filters, infer safe hierarchies and operators. '
+             'conservative: Merge identical filters, infer safe hierarchies. '
              'aggressive: More aggressive merging with subset detection. '
              'interactive: Show safety analysis and prompt for each merge.'
     )
     validate_parser.add_argument(
-        '--preserve-raw',
+        '--infer-operators',
         action='store_true',
-        help='Preserve all raw Gmail properties during conversion'
+        help='Infer YAML operators (any, all, not) from Gmail OR/AND/NOT patterns. '
+             'Creates more readable YAML but requires well-formed expressions with balanced parentheses. '
+             'Will fail if malformed expressions are encountered.'
+    )
+    validate_parser.add_argument(
+        '--no-preserve-raw',
+        dest='preserve_raw',
+        action='store_false',
+        default=True,
+        help='Do not preserve raw Gmail properties during conversion'
+    )
+    validate_parser.add_argument(
+        '--use-canonical',
+        action='store_true',
+        default=True,
+        help='Use canonical XML comparison for order-insensitive validation (recommended)'
+    )
+    validate_parser.add_argument(
+        '--no-canonical',
+        dest='use_canonical',
+        action='store_false',
+        help='Disable canonical comparison and use dictionary comparison instead'
     )
     
     # ========== SYNC command (upload + prune) ==========
@@ -384,7 +419,9 @@ def cmd_convert(args):
     # Set options based on merging level
     merge_filters = merging_level != 'none'
     infer_more = merging_level in ['conservative', 'aggressive', 'interactive']
-    infer_operators = merging_level != 'none'
+    # Use command-line option if provided, otherwise default to False
+    # Operator inference is disabled by default due to issues with complex/malformed expressions
+    infer_operators = getattr(args, 'infer_operators', False)
     
     # Map merging level to strategy
     if merging_level == 'none':
@@ -400,7 +437,7 @@ def cmd_convert(args):
     
     # Create converter
     converter = GmailFilterConverter(
-        preserve_raw=True,  # Always preserve Gmail-specific properties
+        preserve_raw=args.preserve_raw,
         smart_clean=args.smart_clean,
         merge_filters=merge_filters,
         infer_more=infer_more,
@@ -416,7 +453,10 @@ def cmd_convert(args):
             # XML to YAML
             result = converter.xml_to_yaml(args.input_file, args.output)
             if not args.output:
-                print(result)
+                # Convert to YAML string for stdout
+                import yaml
+                yaml_str = yaml.dump(result, default_flow_style=False, allow_unicode=True, sort_keys=False)
+                print(yaml_str, end='')
         else:
             # YAML to XML
             result = converter.yaml_to_xml(args.input_file, args.output)
@@ -447,7 +487,9 @@ def cmd_validate(args):
     # Set options based on merging level
     merge_filters = merging_level != 'none'
     infer_more = merging_level in ['conservative', 'aggressive', 'interactive']
-    infer_operators = merging_level != 'none'
+    # Use command-line option if provided, otherwise default to False
+    # Operator inference is disabled by default due to issues with complex/malformed expressions
+    infer_operators = getattr(args, 'infer_operators', False)
     
     # Map merging level to strategy
     if merging_level == 'none':
@@ -463,7 +505,7 @@ def cmd_validate(args):
     
     # Create converter with all options
     converter = GmailFilterConverter(
-        preserve_raw=args.preserve_raw if hasattr(args, 'preserve_raw') else True,
+        preserve_raw=args.preserve_raw,
         smart_clean=args.smart_clean if hasattr(args, 'smart_clean') else False,
         merge_filters=merge_filters,
         infer_more=infer_more,
@@ -478,7 +520,10 @@ def cmd_validate(args):
         else:
             print(f"🔄 Validating round-trip conversion for {args.xml_file}...", file=sys.stderr)
             
-        is_valid = converter.validate_round_trip(args.xml_file)
+        is_valid = converter.validate_round_trip(
+            args.xml_file, 
+            use_canonical=args.use_canonical if hasattr(args, 'use_canonical') else True
+        )
         stats = converter.get_stats()
         
         if is_valid:
