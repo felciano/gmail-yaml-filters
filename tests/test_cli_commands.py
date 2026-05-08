@@ -320,6 +320,8 @@ class TestCLICommands:
             args.dry_run = False
             args.client_secret = None
             args.credential_store = None
+            args.label_pattern = '.*'  # Match all labels
+            args.prune_labels = False  # Don't prune labels in test
 
             cmd_prune(args)
             

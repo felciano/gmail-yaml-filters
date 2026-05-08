@@ -610,8 +610,8 @@ def cmd_prune(args):
             ruleset,
             service=service,
             dry_run=args.dry_run,
-            only_matching=match,
-            ignore_errors=False
+            match=match,
+            continue_on_http_error=False
         )
 
 
