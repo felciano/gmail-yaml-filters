@@ -2,9 +2,13 @@
 *.pyc
 .cache
 .coverage
+.pytest_cache/
 .tox
 __pycache__
 build/
 dist/
+htmlcov/
+output/*
+!output/.gitkeep
 poetry.lock
 venv_*/
