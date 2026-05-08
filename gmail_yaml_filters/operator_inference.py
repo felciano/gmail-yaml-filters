@@ -87,6 +87,31 @@ class OperatorInference:
         
         return modified
     
+    def _is_balanced(self, value: str) -> bool:
+        """
+        Check if parentheses and brackets are properly balanced in the expression.
+        
+        Args:
+            value: String to check
+            
+        Returns:
+            True if balanced, False otherwise
+        """
+        stack = []
+        pairs = {'(': ')', '[': ']', '{': '}'}
+        
+        for char in value:
+            if char in pairs:
+                stack.append(char)
+            elif char in pairs.values():
+                if not stack:
+                    return False
+                last_open = stack.pop()
+                if pairs[last_open] != char:
+                    return False
+        
+        return len(stack) == 0
+    
     def _process_search_string(self, value: str, field: str) -> Union[str, Dict]:
         """
         Process a search string to detect and convert operators.
@@ -97,7 +122,20 @@ class OperatorInference:
             
         Returns:
             Original string or operator structure
+            
+        Raises:
+            ValueError: If expression has unbalanced parentheses/brackets
         """
+        # First check if the expression has balanced parentheses/brackets
+        # If not balanced, fail the conversion to avoid data corruption
+        if not self._is_balanced(value):
+            raise ValueError(
+                f"Unbalanced parentheses/brackets in expression: '{value}'\n"
+                f"Field: {field}\n"
+                f"This is likely a malformed Gmail filter expression.\n"
+                f"Please fix the filter in Gmail or disable operator inference with --no-infer-operators"
+            )
+        
         # Try to detect patterns in order of precedence
         # Complex patterns should be checked first to avoid partial matches
         
