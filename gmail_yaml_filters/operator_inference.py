@@ -112,6 +112,68 @@ class OperatorInference:
         
         return len(stack) == 0
     
+    def _split_top_level(self, value: str, keyword: str) -> List[str]:
+        """
+        Split on a keyword that appears at nesting depth zero, outside quotes.
+
+        Gmail expressions nest operators inside parentheses, so a naive split
+        on " OR " / " AND " can cut a bracketed group in half and produce
+        unbalanced fragments.
+
+        Args:
+            value: String to split
+            keyword: Separator keyword, e.g. 'OR' or 'AND'
+
+        Returns:
+            List of terms. A single-element list means there was no
+            separator at the top level.
+        """
+        pairs = {'(': ')', '[': ']', '{': '}'}
+        closers = set(pairs.values())
+        needle = ' {0} '.format(keyword)
+
+        terms = []
+        current = ''
+        depth = 0
+        in_quotes = False
+        quote_char = None
+        index = 0
+
+        while index < len(value):
+            char = value[index]
+
+            if in_quotes:
+                current += char
+                if char == quote_char:
+                    in_quotes = False
+                    quote_char = None
+                index += 1
+                continue
+
+            if char in '"\'':
+                in_quotes = True
+                quote_char = char
+                current += char
+                index += 1
+                continue
+
+            if char in pairs:
+                depth += 1
+            elif char in closers:
+                depth = max(0, depth - 1)
+
+            if depth == 0 and value[index:index + len(needle)] == needle:
+                terms.append(current.strip())
+                current = ''
+                index += len(needle)
+                continue
+
+            current += char
+            index += 1
+
+        terms.append(current.strip())
+        return [term for term in terms if term]
+
     def _process_search_string(self, value: str, field: str) -> Union[str, Dict]:
         """
         Process a search string to detect and convert operators.
@@ -189,19 +251,11 @@ class OperatorInference:
         
         # Pattern 1: Explicit OR
         # Examples: "alice OR bob", "alice@example.com OR bob@example.com"
-        or_pattern = r'^(.+?)\s+OR\s+(.+)$'
-        match = re.match(or_pattern, stripped_value)
-        if match:
-            terms = [match.group(1).strip(), match.group(2).strip()]
-            # Check for additional ORs
-            while ' OR ' in terms[-1]:
-                parts = terms[-1].split(' OR ', 1)
-                terms[-1] = parts[0].strip()
-                terms.append(parts[1].strip())
-            
+        terms = self._split_top_level(stripped_value, 'OR')
+        if len(terms) > 1:
             # Strip quotes from each term
             terms = [self._strip_quotes(t) for t in terms]
-            
+
             # Process each term recursively
             processed_terms = [self._process_search_string(t, '') for t in terms]
             return {'any': processed_terms}
@@ -251,19 +305,11 @@ class OperatorInference:
         
         # Pattern 1: Explicit AND
         # Example: "alice AND bob"
-        and_pattern = r'^(.+?)\s+AND\s+(.+)$'
-        match = re.match(and_pattern, stripped_value)
-        if match:
-            terms = [match.group(1).strip(), match.group(2).strip()]
-            # Check for additional ANDs
-            while ' AND ' in terms[-1]:
-                parts = terms[-1].split(' AND ', 1)
-                terms[-1] = parts[0].strip()
-                terms.append(parts[1].strip())
-            
+        terms = self._split_top_level(stripped_value, 'AND')
+        if len(terms) > 1:
             # Strip quotes from each term
             terms = [self._strip_quotes(t) for t in terms]
-            
+
             # Process each term recursively
             processed_terms = [self._process_search_string(t, '') for t in terms]
             return {'all': processed_terms}

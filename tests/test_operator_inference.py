@@ -253,3 +253,19 @@ class TestOperatorInference:
         for term in result['any']:
             assert not term.startswith('(')
             assert not term.endswith(')')
+    def test_or_nested_in_parentheses_is_not_a_top_level_or(self):
+        """An OR inside parentheses must not split the surrounding expression."""
+        result = self.inference._detect_or_pattern("Encountered AND (warning OR error)")
+        assert result is None
+
+    def test_real_world_and_with_parenthesized_ors(self):
+        """Real-world Gmail export: ANDs at top level, ORs nested in parentheses."""
+        value = "Encountered AND (warning OR error) AND ([PFM] OR [SO])"
+        result = self.inference._process_search_string(value, "hasTheWord")
+        assert result == {
+            'all': [
+                'Encountered',
+                {'any': ['warning', 'error']},
+                {'any': ['[PFM]', '[SO]']},
+            ]
+        }
